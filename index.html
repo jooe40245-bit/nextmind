@@ -9,25 +9,24 @@
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #050b1f, #0c1736);
-    font-family: Arial, Helvetica, sans-serif;
+    background: #0b0f1a;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: white;
+    font-family: Arial, sans-serif;
 }
 
-.container {
+.box {
     background: #111a3a;
     padding: 40px;
-    border-radius: 20px;
+    border-radius: 15px;
     text-align: center;
-    width: 320px;
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+    width: 300px;
 }
 
 h1 {
+    color: white;
     margin-bottom: 30px;
 }
 
@@ -36,23 +35,17 @@ button {
     padding: 15px;
     margin: 10px 0;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     background: #00c2d1;
-    color: black;
     font-size: 16px;
     cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #00e5ff;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="box">
     <h1>Bem-vindo à NextMind</h1>
 
     <button onclick="window.location.href='login.html'">
