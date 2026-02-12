@@ -1,46 +1,86 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>NextMind - Área do Aluno</title>
-  <style>
-    body {
-      background:#0b0f1a;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height:100vh;
-      font-family:Arial, sans-serif;
-      color:#fff;
-    }
-    .box {
-      background:#12172a;
-      padding:40px;
-      border-radius:12px;
-      width:350px;
-      text-align:center;
-    }
-    button {
-      width:100%;
-      padding:15px;
-      margin-top:15px;
-      border:none;
-      border-radius:8px;
-      background:#00e5ff;
-      color:#000;
-      font-size:16px;
-      cursor:pointer;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - NextMind</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #050b1f, #0c1736);
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+.container {
+    background: #111a3a;
+    padding: 40px;
+    border-radius: 20px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0,255,255,0.1);
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: #00c2d1;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #00e5ff;
+}
+</style>
 </head>
+
 <body>
 
-<div class="box">
-  <h2>Bem-vindo à NextMind</h2>
+<div class="container">
+    <h2>Login - Área do Aluno</h2>
 
-  <button onclick="location.href='login.html'">Entrar</button>
-  <button onclick="location.href='pagamento.html'">Pagamento / Renovar</button>
+    <input type="text" id="whats" placeholder="Digite seu WhatsApp">
+
+    <button onclick="entrar()">Entrar</button>
 </div>
+
+<script>
+function entrar() {
+    var numero = document.getElementById("whats").value;
+
+    if(numero === "") {
+        alert("Digite seu WhatsApp!");
+        return;
+    }
+
+    alert("Login realizado com sucesso!");
+
+    // Aqui você pode redirecionar depois
+    // window.location.href = "area.html";
+}
+</script>
 
 </body>
 </html>
