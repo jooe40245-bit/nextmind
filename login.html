@@ -59,12 +59,14 @@
 
 <body>
 
+  <!-- LOGIN -->
   <div class="box" id="loginBox">
     <h2>Login do Aluno</h2>
     <input type="text" id="whats" placeholder="Digite seu WhatsApp">
     <button onclick="login()">Entrar</button>
   </div>
 
+  <!-- ÁREA DO ALUNO -->
   <div class="box hidden" id="areaAluno">
     <h2>Bem-vindo ao NextMind</h2>
     <p>Acesso liberado aos cursos</p>
@@ -96,9 +98,11 @@
         if (status.trim() === "ATIVO") {
           document.getElementById("loginBox").classList.add("hidden");
           document.getElementById("areaAluno").classList.remove("hidden");
-        } else if (status.trim() === "VENCIDO") {
+        } 
+        else if (status.trim() === "VENCIDO") {
           alert("Seu acesso está vencido. Renove sua assinatura.");
-        } else {
+        } 
+        else {
           alert("WhatsApp não encontrado.");
         }
 
