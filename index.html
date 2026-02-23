@@ -1,61 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextMind</title>
+  <meta charset="UTF-8">
+  <title>NextMind - Cursos</title>
 
-<style>
-body {
-    margin: 0;
-    padding: 0;
-    background: #0b0f1a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-}
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0f1a;
+      color: #ffffff;
+      text-align: center;
+      padding: 40px;
+    }
 
-.box {
-    background: #111a3a;
-    padding: 40px;
-    border-radius: 15px;
-    text-align: center;
-    width: 300px;
-}
+    .box {
+      max-width: 520px;
+      margin: auto;
+      background: #11162a;
+      padding: 30px;
+      border-radius: 10px;
+    }
 
-h1 {
-    color: white;
-    margin-bottom: 30px;
-}
+    .btn {
+      display: block;
+      margin-top: 20px;
+      padding: 15px;
+      background: #00e5ff;
+      color: #000;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
 
-button {
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 8px;
-    background: #00c2d1;
-    font-size: 16px;
-    cursor: pointer;
-}
-</style>
+    .pix {
+      margin-top: 15px;
+      background: #0d1325;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 14px;
+      word-break: break-all;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="box">
-    <h1>Bem-vindo à NextMind</h1>
+  <div class="box">
+    <h2>📚 NextMind Cursos</h2>
+    <p>Acesso completo a todos os cursos do Drive</p>
 
-    <button onclick="window.location.href='login.html'">
-        Entrar
-    </button>
+    <h3>💳 Planos</h3>
+    <p>Mensal: <strong>R$ 14,99</strong></p>
+    <p>Anual: <strong>R$ 129,90</strong></p>
 
-    <button onclick="window.location.href='pagamento.html'">
-        Pagamento / Renovar
-    </button>
-</div>
+    <h3>🔑 PIX</h3>
+    <div class="pix">
+      kbmm40245@gmail.com
+    </div>
+
+    <a class="btn"
+       href="https://wa.me/5513988238928?text=Olá!%20Já%20realizei%20o%20pagamento.%0A%0A📌%20Plano:%0A📌%20WhatsApp:%0A📌%20Gmail:%0A📎%20Segue%20o%20comprovante:"
+       target="_blank">
+      Enviar comprovante no WhatsApp
+    </a>
+
+    <a class="btn" href="login.html">
+      Já sou aluno
+    </a>
+  </div>
 
 </body>
 </html>
