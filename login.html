@@ -1,116 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>NextMind - Área do Aluno</title>
+<meta charset="UTF-8">
+<title>NextMind • Área do Aluno</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0b0f1a;
-      color: #ffffff;
-      text-align: center;
-      padding: 40px;
-    }
+<style>
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #070b18, #0b1230);
+  color: #fff;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
 
-    .box {
-      max-width: 500px;
-      margin: auto;
-      background: #11162a;
-      padding: 30px;
-      border-radius: 10px;
-    }
+.box {
+  max-width: 420px;
+  margin: 100px auto;
+  background: #0f1738;
+  padding: 40px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+}
 
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border-radius: 5px;
-      border: none;
-    }
+input {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
 
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 20px;
-      background: #00e5ff;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 15px;
+  background: #00e5ff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    .btn {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 15px 20px;
-      background: #00e5ff;
-      color: #000;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-    }
+.btn {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 15px 20px;
+  background: #00e5ff;
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
 
-    .hidden {
-      display: none;
-    }
-  </style>
+.hidden {
+  display: none;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- LOGIN -->
-  <div class="box" id="loginBox">
-    <h2>Login do Aluno</h2>
-    <input type="text" id="whats" placeholder="Digite seu WhatsApp">
-    <button onclick="login()">Entrar</button>
-  </div>
+<div class="box" id="loginBox">
+  <h2>Área do Aluno</h2>
+  <input type="text" id="whats" placeholder="Digite seu WhatsApp">
+  <button onclick="login()">Entrar</button>
+</div>
 
-  <!-- ÁREA DO ALUNO -->
-  <div class="box hidden" id="areaAluno">
-    <h2>Bem-vindo ao NextMind</h2>
-    <p>Acesso liberado aos cursos</p>
+<div class="box hidden" id="areaAluno">
+  <h2>Acesso Liberado</h2>
+  <p>Bem-vindo ao NextMind</p>
 
-    <a href="https://drive.google.com/drive/folders/12dVt6qKUWJti_4Q4MWQIs8GTE-u_fIn9?usp=sharing"
-       target="_blank"
-       class="btn">
-       Acessar todos os cursos
-    </a>
-  </div>
+  <a class="btn"
+     href="https://drive.google.com/drive/folders/12dVt6qKUWJti_4Q4MWQIs8GTE-u_fIn9?usp=sharing"
+     target="_blank">
+     Acessar cursos
+  </a>
+</div>
 
-  <script>
-    async function login() {
-      var whats = document.getElementById("whats").value;
+<script>
+async function login() {
+  var whats = document.getElementById("whats").value;
 
-      if (whats.trim() === "") {
-        alert("Digite seu WhatsApp");
-        return;
-      }
+  if (whats.trim() === "") {
+    alert("Digite seu WhatsApp");
+    return;
+  }
 
-      try {
-        const resposta = await fetch(
-          "https://script.google.com/macros/s/AKfycby4nEQjdmfFuv3UnSQZ3zkiY1MhB4U7hkFMGvW45LwvmIewz7cdVs9lpKCIHqeYLoV3/exec?whats=" 
-          + whats
-        );
+  try {
+    const resposta = await fetch(
+      "https://script.google.com/macros/s/AKfycby4nEQjdmfFuv3UnSQZ3zkiY1MhB4U7hkFMGvW45LwvmIewz7cdVs9lpKCIHqeYLoV3/exec?whats=" + whats
+    );
 
-        const status = await resposta.text();
+    const status = await resposta.text();
 
-        if (status.trim() === "ATIVO") {
-          document.getElementById("loginBox").classList.add("hidden");
-          document.getElementById("areaAluno").classList.remove("hidden");
-        } 
-        else if (status.trim() === "VENCIDO") {
-          alert("Seu acesso está vencido. Renove sua assinatura.");
-        } 
-        else {
-          alert("WhatsApp não encontrado.");
-        }
-
-      } catch (erro) {
-        alert("Erro ao verificar acesso.");
-      }
+    if (status.trim() === "ATIVO") {
+      document.getElementById("loginBox").classList.add("hidden");
+      document.getElementById("areaAluno").classList.remove("hidden");
+    } else if (status.trim() === "VENCIDO") {
+      alert("Seu acesso está vencido. Renove sua assinatura.");
+    } else {
+      alert("WhatsApp não encontrado.");
     }
-  </script>
+  } catch (e) {
+    alert("Erro ao validar acesso.");
+  }
+}
+</script>
 
 </body>
 </html>
