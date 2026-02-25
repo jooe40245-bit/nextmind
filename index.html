@@ -72,6 +72,8 @@ h1 {
   font-weight: bold;
   border-radius: 8px;
   transition: 0.3s;
+  cursor: pointer;
+  border: none;
 }
 
 .btn:hover {
@@ -96,6 +98,13 @@ h1 {
 
 .footer-btn {
   margin-top: 40px;
+}
+
+.copy-msg {
+  margin-top: 10px;
+  color: #00ffcc;
+  font-size: 14px;
+  display: none;
 }
 </style>
 </head>
@@ -139,9 +148,18 @@ h1 {
   <!-- PIX -->
   <div class="pix-box">
     <h3>🔑 Pagamento via PIX</h3>
-    <p>Chave PIX (copie e cole):</p>
-    <div class="pix-key">
+    <p>Chave PIX:</p>
+
+    <div class="pix-key" id="pixKey">
       kbmm40245@gmail.com
+    </div>
+
+    <button class="btn" onclick="copiarPix()">
+      Copiar chave PIX
+    </button>
+
+    <div class="copy-msg" id="copyMsg">
+      ✅ Chave PIX copiada com sucesso!
     </div>
   </div>
 
@@ -153,5 +171,24 @@ h1 {
   </div>
 </div>
 
+<script>
+function copiarPix() {
+  const chave = document.getElementById("pixKey").innerText;
+
+  navigator.clipboard.writeText(chave).then(function() {
+    const msg = document.getElementById("copyMsg");
+    msg.style.display = "block";
+
+    setTimeout(() => {
+      msg.style.display = "none";
+    }, 3000);
+  });
+}
+</script>
+
 </body>
 </html>
+
+</body>
+</html>
+
