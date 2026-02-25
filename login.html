@@ -43,40 +43,18 @@ button {
   cursor: pointer;
 }
 
-.btn {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 15px 20px;
-  background: #00e5ff;
-  color: #000;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-}
-
-.hidden {
-  display: none;
+button:hover {
+  transform: scale(1.05);
 }
 </style>
 </head>
 
 <body>
 
-<div class="box" id="loginBox">
+<div class="box">
   <h2>Área do Aluno</h2>
   <input type="text" id="whats" placeholder="Digite seu WhatsApp">
   <button onclick="login()">Entrar</button>
-</div>
-
-<div class="box hidden" id="areaAluno">
-  <h2>Acesso Liberado</h2>
-  <p>Bem-vindo ao NextMind</p>
-
-  <a class="btn"
-     href="https://drive.google.com/drive/folders/12dVt6qKUWJti_4Q4MWQIs8GTE-u_fIn9?usp=sharing"
-     target="_blank">
-     Acessar cursos
-  </a>
 </div>
 
 <script>
@@ -96,8 +74,7 @@ async function login() {
     const status = await resposta.text();
 
     if (status.trim() === "ATIVO") {
-      document.getElementById("loginBox").classList.add("hidden");
-      document.getElementById("areaAluno").classList.remove("hidden");
+      window.location.href = "area.html";
     } else if (status.trim() === "VENCIDO") {
       alert("Seu acesso está vencido. Renove sua assinatura.");
     } else {
