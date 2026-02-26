@@ -6,161 +6,169 @@
 <title>Área do Aluno</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background: #0b0f1a;
-    color: white;
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#0b0f1a;
+    color:white;
 }
 
-header {
-    background: #000;
-    padding: 20px 50px;
-    font-size: 22px;
-    font-weight: bold;
-    color: #22d3ee;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+/* ===== BANNER ===== */
+.banner{
+    height:80vh;
+    background:linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.3)),
+    url('https://images.unsplash.com/photo-1492724441997-5dc865305da7');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:0 80px;
 }
 
-.container {
-    padding: 30px 50px;
+.banner h1{
+    font-size:60px;
+    margin:0;
 }
 
-h2 {
-    margin-bottom: 15px;
-    color: #22d3ee;
+.banner p{
+    font-size:20px;
+    max-width:600px;
+    margin-top:20px;
 }
 
-.linha {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 20px;
+.banner button{
+    margin-top:30px;
+    padding:15px 35px;
+    font-size:18px;
+    background:#22d3ee;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.card {
-    min-width: 250px;
-    height: 150px;
-    background: linear-gradient(135deg, #111c3a, #1e293b);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.4s;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+/* ===== CATEGORIAS ===== */
+.container{
+    padding:50px 80px;
 }
 
-.card:hover {
-    transform: scale(1.1);
-    background: #22d3ee;
-    color: black;
+.categorias{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap:30px;
 }
 
-.card a {
-    text-decoration: none;
-    color: inherit;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.card{
+    height:180px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+    transition:0.4s;
+    cursor:pointer;
+    text-decoration:none;
+    color:white;
 }
 
-.sair {
-    text-align: center;
-    margin: 50px 0;
+.card:hover{
+    transform:scale(1.05);
 }
 
-.sair a {
-    padding: 12px 30px;
-    background: #22d3ee;
-    color: black;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
+/* CORES PERSONALIZADAS */
+.design{background:linear-gradient(135deg,#1e3a8a,#2563eb);}
+.artes{background:linear-gradient(135deg,#7c2d12,#ea580c);}
+.financeiro{background:linear-gradient(135deg,#064e3b,#10b981);}
+.culinaria{background:linear-gradient(135deg,#78350f,#f59e0b);}
+.estudos{background:linear-gradient(135deg,#4c1d95,#8b5cf6);}
+.ia{background:linear-gradient(135deg,#0f172a,#22d3ee);}
+.saude{background:linear-gradient(135deg,#7f1d1d,#ef4444);}
+.marketing{background:linear-gradient(135deg,#1e293b,#38bdf8);}
+.religiao{background:linear-gradient(135deg,#292524,#a8a29e);}
+.tesla{background:linear-gradient(135deg,#111827,#6b7280);}
+.diversos{background:linear-gradient(135deg,#374151,#9ca3af);}
+
+.sair{
+    text-align:center;
+    margin:60px 0;
 }
 
-::-webkit-scrollbar {
-    height: 8px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #22d3ee;
-    border-radius: 10px;
+.sair a{
+    background:#22d3ee;
+    padding:12px 30px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    color:black;
 }
 </style>
 </head>
 
 <body>
 
-<header>🔥 Plataforma de Cursos</header>
+<!-- BANNER -->
+<div class="banner">
+    <h1>Bem-vindo à Plataforma</h1>
+    <p>Explore todas as categorias disponíveis e tenha acesso aos melhores cursos organizados por área.</p>
+    <button onclick="window.scrollTo({top:800,behavior:'smooth'})">Explorar Cursos</button>
+</div>
 
+<!-- CATEGORIAS -->
 <div class="container">
+    <div class="categorias">
 
-<h2>🎨 ARTDIGITAL - DESIGN</h2>
-<div class="linha">
-<div class="card"><a href="https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA" target="_blank">Entrar</a></div>
-</div>
+        <a href="https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA" target="_blank" class="card design">
+        🎨 ARTDIGITAL - DESIGN
+        </a>
 
-<h2>🥋 ARTES MARCIAIS</h2>
-<div class="linha">
-<div class="card"><a href="https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC" target="_blank">Entrar</a></div>
-</div>
+        <a href="https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC" target="_blank" class="card artes">
+        🥋 ARTES MARCIAIS
+        </a>
 
-<h2>💰 FINANCEIRO</h2>
-<div class="linha">
-<div class="card"><a href="https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu" target="_blank">Entrar</a></div>
-</div>
+        <a href="https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu" target="_blank" class="card financeiro">
+        💰 FINANCEIRO
+        </a>
 
-<h2>🍳 CULINÁRIA</h2>
-<div class="linha">
-<div class="card"><a href="https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r" target="_blank">Entrar</a></div>
-</div>
+        <a href="https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r" target="_blank" class="card culinaria">
+        🍳 CULINÁRIA
+        </a>
 
-<h2>📚 ESTUDOS</h2>
-<div class="linha">
-<div class="card"><a href="https://drive.google.com/drive/folders/1rDBhTTxD3pc5kp-ljWQ5zzBldzbdYC81" target="_blank">Entrar</a></div>
-</div>
+        <a href="https://drive.google.com/drive/folders/1rDBhTTxD3pc5kp-ljWQ5zzBldzbdYC81" target="_blank" class="card estudos">
+        📚 ESTUDOS
+        </a>
 
-<h2>🤖 IA</h2>
-<div class="linha">
-<div class="card"><a href="https://drive.google.com/drive/folders/12DbWmPDFcgs_mM_R6cCSrxrHejiBIMOG" target="_blank">Entrar</a></div>
-</div>
+        <a href="https://drive.google.com/drive/folders/12DbWmPDFcgs_mM_R6cCSrxrHejiBIMOG" target="_blank" class="card ia">
+        🤖 IA
+        </a>
 
-<h2>🏥 SAÚDE</h2>
-<div class="linha">
-<div class="card"><a href="https://drive.google.com/drive/folders/1ywrWcyyZHdmpDkUXz4_OdfnU5o8sPk1E" target="_blank">Entrar</a></div>
-</div>
+        <a href="https://drive.google.com/drive/folders/1ywrWcyyZHdmpDkUXz4_OdfnU5o8sPk1E" target="_blank" class="card saude">
+        🏥 SAÚDE
+        </a>
 
-<h2>📈 MARKETING DIGITAL - TRÁFEGO PAGO</h2>
-<div class="linha">
-<div class="card"><a href="https://drive.google.com/drive/folders/1cGdn-RRV0rMbU_RLtFbA3MBiw1hphFGW" target="_blank">Entrar</a></div>
-</div>
+        <a href="https://drive.google.com/drive/folders/1cGdn-RRV0rMbU_RLtFbA3MBiw1hphFGW" target="_blank" class="card marketing">
+        📈 MARKETING DIGITAL
+        </a>
 
-<h2>✝ RELIGIÃO</h2>
-<div class="linha">
-<div class="card"><a href="https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r" target="_blank">Entrar</a></div>
-</div>
+        <a href="https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r" target="_blank" class="card religiao">
+        ✝ RELIGIÃO
+        </a>
 
-<h2>⚡ TESLA TREINAMENTOS</h2>
-<div class="linha">
-<div class="card"><a href="https://drive.google.com/drive/folders/1xsdJ-26VD-guYSj7Kq_ITJVXcwlxKfAD" target="_blank">Entrar</a></div>
-</div>
+        <a href="https://drive.google.com/drive/folders/1xsdJ-26VD-guYSj7Kq_ITJVXcwlxKfAD" target="_blank" class="card tesla">
+        ⚡ TESLA TREINAMENTOS
+        </a>
 
-<h2>📦 DIVERSOS</h2>
-<div class="linha">
-<div class="card"><a href="https://drive.google.com/drive/folders/123z-XyT10UInmh1tbz3IiD0Aap3Q2QMg" target="_blank">Entrar</a></div>
-</div>
+        <a href="https://drive.google.com/drive/folders/123z-XyT10UInmh1tbz3IiD0Aap3Q2QMg" target="_blank" class="card diversos">
+        📦 DIVERSOS
+        </a>
 
-<div class="sair">
-<a href="login.html">Sair</a>
-</div>
+    </div>
 
+    <div class="sair">
+        <a href="login.html">Sair</a>
+    </div>
 </div>
 
 </body>
