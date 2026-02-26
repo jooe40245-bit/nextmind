@@ -6,12 +6,15 @@
 <title>Área do Aluno</title>
 
 <style>
+
 body{
 margin:0;
 font-family:Arial, sans-serif;
 background:#0b0f1a;
 color:white;
 }
+
+/* ===== BANNER ===== */
 
 .banner{
 height:80vh;
@@ -47,6 +50,8 @@ cursor:pointer;
 font-weight:bold;
 }
 
+/* ===== CONTAINER ===== */
+
 .container{
 padding:60px 80px;
 }
@@ -57,14 +62,17 @@ grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
 gap:30px;
 }
 
+/* ===== CARD ===== */
+
 .card{
 position:relative;
-height:200px;
+height:220px;
 border-radius:15px;
 display:flex;
-align-items:flex-end;
+flex-direction:column;
+justify-content:flex-end;
 padding:20px;
-font-size:22px;
+font-size:20px;
 font-weight:bold;
 text-decoration:none;
 color:white;
@@ -89,57 +97,46 @@ position:relative;
 z-index:2;
 }
 
+/* ===== ÍCONE ANIMADO ===== */
+
+.icon{
+position:absolute;
+top:20px;
+right:20px;
+font-size:40px;
+z-index:2;
+animation:flutuar 3s ease-in-out infinite;
+transition:0.3s;
+}
+
+.card:hover .icon{
+transform:scale(1.3) rotate(10deg);
+filter:drop-shadow(0 0 10px #22d3ee);
+}
+
+@keyframes flutuar{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0px);}
+}
+
 .card:hover{
 transform:scale(1.05);
 }
 
-/* ===== IMAGENS ATUALIZADAS ===== */
+/* ===== IMAGENS ===== */
 
-.design{
-background-image:url('https://images.unsplash.com/photo-1522199710521-72d69614c702?q=80&w=1600&auto=format&fit=crop');
-}
-
-/* LUTA REAL */
-.artes{
-background-image:url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1600&auto=format&fit=crop');
-}
-
-.financeiro{
-background-image:url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1600&auto=format&fit=crop');
-}
-
-.culinaria{
-background-image:url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=1600&auto=format&fit=crop');
-}
-
-.estudos{
-background-image:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1600&auto=format&fit=crop');
-}
-
-.ia{
-background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1600&auto=format&fit=crop');
-}
-
-.saude{
-background-image:url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1600&auto=format&fit=crop');
-}
-
-.marketing{
-background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop');
-}
-
-/* RELIGIÃO NEUTRA / ESPIRITUALIDADE */
-.religiao{
-background-image:url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=1600&auto=format&fit=crop');
-}
-
-.tesla{
-background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop');
-}
-
-.diversos{
-background-image:url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1600&auto=format&fit=crop');
-}
+.design{background-image:url('https://images.unsplash.com/photo-1522199710521-72d69614c702?q=80&w=1600&auto=format&fit=crop');}
+.artes{background-image:url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1600&auto=format&fit=crop');}
+.financeiro{background-image:url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1600&auto=format&fit=crop');}
+.culinaria{background-image:url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=1600&auto=format&fit=crop');}
+.estudos{background-image:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1600&auto=format&fit=crop');}
+.ia{background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1600&auto=format&fit=crop');}
+.saude{background-image:url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1600&auto=format&fit=crop');}
+.marketing{background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop');}
+.religiao{background-image:url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=1600&auto=format&fit=crop');}
+.tesla{background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop');}
+.diversos{background-image:url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1600&auto=format&fit=crop');}
 
 .sair{
 text-align:center;
@@ -154,6 +151,7 @@ text-decoration:none;
 font-weight:bold;
 color:black;
 }
+
 </style>
 </head>
 
@@ -161,7 +159,7 @@ color:black;
 
 <div class="banner">
 <h1>Bem-vindo à Plataforma</h1>
-<p>Explore todas as categorias disponíveis e tenha acesso aos melhores cursos.</p>
+<p>Explore todas as categorias disponíveis.</p>
 <button onclick="window.scrollTo({top:800,behavior:'smooth'})">Explorar Cursos</button>
 </div>
 
@@ -169,27 +167,60 @@ color:black;
 
 <div class="categorias">
 
-<a href="https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA" target="_blank" class="card design"><span>🎨 ARTDIGITAL - DESIGN</span></a>
+<a href="https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA" target="_blank" class="card design">
+<div class="icon">🎨</div>
+<span>ARTDIGITAL - DESIGN</span>
+</a>
 
-<a href="https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC" target="_blank" class="card artes"><span>🥋 ARTES MARCIAIS</span></a>
+<a href="https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC" target="_blank" class="card artes">
+<div class="icon">🥊</div>
+<span>ARTES MARCIAIS</span>
+</a>
 
-<a href="https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu" target="_blank" class="card financeiro"><span>💰 FINANCEIRO</span></a>
+<a href="https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu" target="_blank" class="card financeiro">
+<div class="icon">💰</div>
+<span>FINANCEIRO</span>
+</a>
 
-<a href="https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r" target="_blank" class="card culinaria"><span>🍳 CULINÁRIA</span></a>
+<a href="https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r" target="_blank" class="card culinaria">
+<div class="icon">🍳</div>
+<span>CULINÁRIA</span>
+</a>
 
-<a href="https://drive.google.com/drive/folders/1rDBhTTxD3pc5kp-ljWQ5zzBldzbdYC81" target="_blank" class="card estudos"><span>📚 ESTUDOS</span></a>
+<a href="https://drive.google.com/drive/folders/1rDBhTTxD3pc5kp-ljWQ5zzBldzbdYC81" target="_blank" class="card estudos">
+<div class="icon">📚</div>
+<span>ESTUDOS</span>
+</a>
 
-<a href="https://drive.google.com/drive/folders/12DbWmPDFcgs_mM_R6cCSrxrHejiBIMOG" target="_blank" class="card ia"><span>🤖 INTELIGÊNCIA ARTIFICIAL</span></a>
+<a href="https://drive.google.com/drive/folders/12DbWmPDFcgs_mM_R6cCSrxrHejiBIMOG" target="_blank" class="card ia">
+<div class="icon">🤖</div>
+<span>INTELIGÊNCIA ARTIFICIAL</span>
+</a>
 
-<a href="https://drive.google.com/drive/folders/1ywrWcyyZHdmpDkUXz4_OdfnU5o8sPk1E" target="_blank" class="card saude"><span>🏥 SAÚDE</span></a>
+<a href="https://drive.google.com/drive/folders/1ywrWcyyZHdmpDkUXz4_OdfnU5o8sPk1E" target="_blank" class="card saude">
+<div class="icon">🏥</div>
+<span>SAÚDE</span>
+</a>
 
-<a href="https://drive.google.com/drive/folders/1cGdn-RRV0rMbU_RLtFbA3MBiw1hphFGW" target="_blank" class="card marketing"><span>📈 MARKETING DIGITAL</span></a>
+<a href="https://drive.google.com/drive/folders/1cGdn-RRV0rMbU_RLtFbA3MBiw1hphFGW" target="_blank" class="card marketing">
+<div class="icon">📈</div>
+<span>MARKETING DIGITAL</span>
+</a>
 
-<a href="https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r" target="_blank" class="card religiao"><span>🌍 RELIGIÃO & ESPIRITUALIDADE</span></a>
+<a href="https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r" target="_blank" class="card religiao">
+<div class="icon">🌍</div>
+<span>RELIGIÃO & ESPIRITUALIDADE</span>
+</a>
 
-<a href="https://drive.google.com/drive/folders/1xsdJ-26VD-guYSj7Kq_ITJVXcwlxKfAD" target="_blank" class="card tesla"><span>⚡ TESLA TREINAMENTOS</span></a>
+<a href="https://drive.google.com/drive/folders/1xsdJ-26VD-guYSj7Kq_ITJVXcwlxKfAD" target="_blank" class="card tesla">
+<div class="icon">⚡</div>
+<span>TESLA TREINAMENTOS</span>
+</a>
 
-<a href="https://drive.google.com/drive/folders/123z-XyT10UInmh1tbz3IiD0Aap3Q2QMg" target="_blank" class="card diversos"><span>📦 DIVERSOS</span></a>
+<a href="https://drive.google.com/drive/folders/123z-XyT10UInmh1tbz3IiD0Aap3Q2QMg" target="_blank" class="card diversos">
+<div class="icon">📦</div>
+<span>DIVERSOS</span>
+</a>
 
 </div>
 
