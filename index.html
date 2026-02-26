@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextMind 3D</title>
+<title>NextMind • Future Platform</title>
 
 <style>
 *{
@@ -20,7 +20,7 @@ body{
     overflow-x:hidden;
 }
 
-/* FUNDO */
+/* FUNDO ESTRELAS */
 canvas{
     position:fixed;
     top:0;
@@ -31,11 +31,11 @@ canvas{
 /* TOPO */
 .topo{
     padding:30px 60px;
-    font-size:28px;
+    font-size:26px;
     font-weight:bold;
     letter-spacing:3px;
     color:#00f0ff;
-    text-shadow:0 0 15px #00f0ff;
+    text-shadow:0 0 20px #00f0ff;
 }
 
 /* GRID */
@@ -47,36 +47,62 @@ canvas{
     perspective:1200px;
 }
 
-/* CARD */
+/* CARD FUTURISTA */
 .card{
     height:180px;
     border-radius:20px;
     background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(15px);
-    border:1px solid rgba(0,255,255,0.2);
+    backdrop-filter:blur(25px);
+    border:1px solid rgba(0,255,255,0.25);
     box-shadow:
-        0 0 20px rgba(0,255,255,0.3),
-        inset 0 0 20px rgba(0,255,255,0.1);
+        0 0 25px rgba(0,255,255,0.3),
+        inset 0 0 25px rgba(0,255,255,0.15);
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
     cursor:pointer;
-    transition:transform .2s ease, box-shadow .3s;
+    transition:transform .15s ease, box-shadow .3s;
     transform-style:preserve-3d;
     position:relative;
+    overflow:hidden;
 }
 
+/* REFLEXO DINÂMICO */
+.card::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:radial-gradient(circle at var(--x) var(--y),
+        rgba(255,255,255,0.6) 0%,
+        rgba(255,255,255,0.25) 10%,
+        transparent 40%);
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+}
+
+/* TEXTO */
 .card h2{
     transform:translateZ(40px);
     color:#00f0ff;
     font-size:18px;
+    letter-spacing:1px;
 }
 
+/* HOVER GLOW */
 .card:hover{
     box-shadow:
-        0 0 40px rgba(0,255,255,0.8),
-        inset 0 0 30px rgba(0,255,255,0.3);
+        0 0 50px rgba(0,255,255,0.9),
+        inset 0 0 35px rgba(0,255,255,0.3);
+}
+
+/* RESPONSIVO */
+@media(max-width:768px){
+    .container{
+        padding:20px;
+        gap:25px;
+    }
 }
 </style>
 </head>
@@ -85,7 +111,7 @@ canvas{
 
 <canvas id="stars"></canvas>
 
-<div class="topo">NEXTMIND • FUTURE PLATFORM</div>
+<div class="topo">NEXTMIND • FUTURE INTERFACE</div>
 
 <div class="container">
 
@@ -128,6 +154,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let stars = [];
+
 for(let i=0;i<200;i++){
     stars.push({
         x:Math.random()*canvas.width,
@@ -151,28 +178,33 @@ function drawStars(){
 }
 drawStars();
 
-/* EFEITO 3D */
+/* 3D + REFLEXO DINÂMICO */
 document.querySelectorAll(".card").forEach(card=>{
+
     card.addEventListener("mousemove",(e)=>{
-        let rect = card.getBoundingClientRect();
-        let x = e.clientX - rect.left;
-        let y = e.clientY - rect.top;
 
-        let centerX = rect.width/2;
-        let centerY = rect.height/2;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-        let rotateX = -(y-centerY)/20;
-        let rotateY = (x-centerX)/20;
+        const centerX = rect.width/2;
+        const centerY = rect.height/2;
+
+        const rotateX = -(y-centerY)/18;
+        const rotateY = (x-centerX)/18;
 
         card.style.transform =
-            `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+
+        card.style.setProperty('--x', x + 'px');
+        card.style.setProperty('--y', y + 'px');
     });
 
     card.addEventListener("mouseleave",()=>{
-        card.style.transform="rotateX(0) rotateY(0)";
+        card.style.transform="rotateX(0) rotateY(0) scale(1)";
     });
-});
 
+});
 </script>
 
 </body>
