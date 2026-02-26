@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextMind • Future Platform</title>
+<title>NextMind • Holographic System</title>
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI', sans-serif;
 }
 
 body{
-    min-height:100vh;
+    height:100vh;
+    overflow:hidden;
     background: radial-gradient(circle at center, #0a0f2c 0%, #02040f 70%);
     color:white;
-    overflow-x:hidden;
 }
 
 /* FUNDO ESTRELAS */
@@ -25,50 +25,83 @@ canvas{
     position:fixed;
     top:0;
     left:0;
-    z-index:-1;
+    z-index:-2;
+}
+
+/* CAMERA */
+.scene{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    perspective:1600px;
+}
+
+/* PAINEL PRINCIPAL */
+.interface{
+    width:85%;
+    height:80vh;
+    border-radius:30px;
+    backdrop-filter:blur(30px);
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(0,255,255,0.2);
+    box-shadow:
+        0 0 60px rgba(0,255,255,0.3),
+        inset 0 0 60px rgba(0,255,255,0.15);
+    padding:40px;
+    transform-style:preserve-3d;
+    animation:cameraFloat 12s ease-in-out infinite alternate;
+    display:flex;
+    flex-direction:column;
+}
+
+/* MOVIMENTO DE CÂMERA */
+@keyframes cameraFloat{
+    0%{ transform:rotateX(3deg) rotateY(-3deg) translateZ(0px); }
+    50%{ transform:rotateX(-3deg) rotateY(3deg) translateZ(30px); }
+    100%{ transform:rotateX(3deg) rotateY(-3deg) translateZ(0px); }
 }
 
 /* TOPO */
 .topo{
-    padding:30px 60px;
-    font-size:26px;
-    font-weight:bold;
+    font-size:22px;
     letter-spacing:3px;
     color:#00f0ff;
     text-shadow:0 0 20px #00f0ff;
+    margin-bottom:30px;
 }
 
 /* GRID */
-.container{
-    padding:40px 60px;
+.grid{
+    flex:1;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:40px;
-    perspective:1200px;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:30px;
+    perspective:1000px;
 }
 
-/* CARD FUTURISTA */
+/* CARD */
 .card{
-    height:180px;
     border-radius:20px;
     background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(25px);
     border:1px solid rgba(0,255,255,0.25);
-    box-shadow:
-        0 0 25px rgba(0,255,255,0.3),
-        inset 0 0 25px rgba(0,255,255,0.15);
+    backdrop-filter:blur(20px);
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
     cursor:pointer;
-    transition:transform .15s ease, box-shadow .3s;
+    transition:.15s;
     transform-style:preserve-3d;
     position:relative;
     overflow:hidden;
+    box-shadow:
+        0 0 25px rgba(0,255,255,0.3),
+        inset 0 0 25px rgba(0,255,255,0.15);
 }
 
-/* REFLEXO DINÂMICO */
+/* REFLEXO */
 .card::before{
     content:"";
     position:absolute;
@@ -82,27 +115,17 @@ canvas{
     transform:translate(-50%,-50%);
 }
 
-/* TEXTO */
 .card h2{
     transform:translateZ(40px);
+    font-size:15px;
     color:#00f0ff;
-    font-size:18px;
-    letter-spacing:1px;
+    padding:20px;
 }
 
-/* HOVER GLOW */
 .card:hover{
     box-shadow:
-        0 0 50px rgba(0,255,255,0.9),
+        0 0 60px rgba(0,255,255,0.9),
         inset 0 0 35px rgba(0,255,255,0.3);
-}
-
-/* RESPONSIVO */
-@media(max-width:768px){
-    .container{
-        padding:20px;
-        gap:25px;
-    }
 }
 </style>
 </head>
@@ -111,32 +134,27 @@ canvas{
 
 <canvas id="stars"></canvas>
 
-<div class="topo">NEXTMIND • FUTURE INTERFACE</div>
+<div class="scene">
+<div class="interface">
 
-<div class="container">
+<div class="topo">NEXTMIND • HOLOGRAPHIC SYSTEM</div>
+
+<div class="grid">
 
 <div class="card" onclick="abrir('https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA')"><h2>Art Digital & Design</h2></div>
-
 <div class="card" onclick="abrir('https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC')"><h2>Artes Marciais</h2></div>
-
 <div class="card" onclick="abrir('https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu')"><h2>Financeiro</h2></div>
-
 <div class="card" onclick="abrir('https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r')"><h2>Culinária</h2></div>
-
 <div class="card" onclick="abrir('https://drive.google.com/drive/folders/1rDBhTTxD3pc5kp-ljWQ5zzBldzbdYC81')"><h2>Estudos</h2></div>
-
 <div class="card" onclick="abrir('https://drive.google.com/drive/folders/12DbWmPDFcgs_mM_R6cCSrxrHejiBIMOG')"><h2>Inteligência Artificial</h2></div>
-
 <div class="card" onclick="abrir('https://drive.google.com/drive/folders/1ywrWcyyZHdmpDkUXz4_OdfnU5o8sPk1E')"><h2>Saúde</h2></div>
-
 <div class="card" onclick="abrir('https://drive.google.com/drive/folders/1cGdn-RRV0rMbU_RLtFbA3MBiw1hphFGW')"><h2>Marketing Digital</h2></div>
-
 <div class="card" onclick="abrir('https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r')"><h2>Religião & Espiritualidade</h2></div>
-
 <div class="card" onclick="abrir('https://drive.google.com/drive/folders/1xsdJ-26VD-guYSj7Kq_ITJVXcwlxKfAD')"><h2>Tesla Treinamentos</h2></div>
-
 <div class="card" onclick="abrir('https://drive.google.com/drive/folders/123z-XyT10UInmh1tbz3IiD0Aap3Q2QMg')"><h2>Diversos</h2></div>
 
+</div>
+</div>
 </div>
 
 <script>
@@ -146,25 +164,23 @@ function abrir(link){
     window.open(link,'_blank');
 }
 
-/* FUNDO ESTRELAS */
+/* ESTRELAS */
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let stars = [];
-
-for(let i=0;i<200;i++){
+let stars=[];
+for(let i=0;i<250;i++){
     stars.push({
         x:Math.random()*canvas.width,
         y:Math.random()*canvas.height,
         r:Math.random()*1.5,
-        d:Math.random()*0.5
+        d:Math.random()*0.4
     });
 }
 
-function drawStars(){
+function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     ctx.fillStyle="white";
     stars.forEach(s=>{
@@ -174,24 +190,20 @@ function drawStars(){
         s.y+=s.d;
         if(s.y>canvas.height) s.y=0;
     });
-    requestAnimationFrame(drawStars);
+    requestAnimationFrame(animate);
 }
-drawStars();
+animate();
 
-/* 3D + REFLEXO DINÂMICO */
+/* REFLEXO + 3D */
 document.querySelectorAll(".card").forEach(card=>{
-
     card.addEventListener("mousemove",(e)=>{
-
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-
         const centerX = rect.width/2;
         const centerY = rect.height/2;
-
-        const rotateX = -(y-centerY)/18;
-        const rotateY = (x-centerX)/18;
+        const rotateX = -(y-centerY)/20;
+        const rotateY = (x-centerX)/20;
 
         card.style.transform =
             `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
@@ -203,7 +215,6 @@ document.querySelectorAll(".card").forEach(card=>{
     card.addEventListener("mouseleave",()=>{
         card.style.transform="rotateX(0) rotateY(0) scale(1)";
     });
-
 });
 </script>
 
