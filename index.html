@@ -1,194 +1,275 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>NextMind • Cursos Premium</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Área do Aluno - Premium</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Arial, sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:#0d0d0d;
+color:white;
+overflow-x:hidden;
 }
 
-body {
-  margin: 0;
-  background: linear-gradient(135deg, #070b18, #0b1230);
-  color: #fff;
-  min-height: 100vh;
+/* LOADER */
+#loader{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+animation:fadeOut 1s forwards;
+animation-delay:2s;
 }
 
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 60px 20px;
-  text-align: center;
+@keyframes fadeOut{
+to{opacity:0;visibility:hidden;}
 }
 
-h1 {
-  font-size: 38px;
-  margin-bottom: 10px;
+.loader-logo{
+font-size:40px;
+color:#e50914;
+font-weight:bold;
+animation:pulse 1s infinite;
 }
 
-.subtitle {
-  color: #9bb0ff;
-  margin-bottom: 50px;
-  font-size: 18px;
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
 }
 
-.plans {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
+/* MENU LATERAL */
+.sidebar{
+position:fixed;
+left:-250px;
+top:0;
+width:250px;
+height:100%;
+background:#111;
+padding:30px 20px;
+transition:.4s;
+z-index:1000;
 }
 
-.plan {
-  background: #0f1738;
-  padding: 30px;
-  border-radius: 14px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+.sidebar.active{
+left:0;
 }
 
-.plan h2 {
-  margin-top: 0;
-  color: #00e5ff;
+.sidebar h2{
+color:#e50914;
+margin-bottom:30px;
 }
 
-.price {
-  font-size: 36px;
-  margin: 15px 0;
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+margin:15px 0;
+transition:.3s;
 }
 
-.plan p {
-  color: #cbd4ff;
+.sidebar a:hover{
+color:#e50914;
 }
 
-.btn {
-  display: block;
-  margin-top: 25px;
-  padding: 15px;
-  background: #00e5ff;
-  color: #000;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: 0.3s;
-  cursor: pointer;
-  border: none;
+.menu-btn{
+position:fixed;
+top:20px;
+left:20px;
+font-size:30px;
+cursor:pointer;
+z-index:1100;
 }
 
-.btn:hover {
-  transform: scale(1.05);
+/* HEADER */
+header{
+padding:20px 80px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:linear-gradient(to bottom,rgba(0,0,0,.9),transparent);
+position:fixed;
+width:100%;
+z-index:500;
 }
 
-.pix-box {
-  margin-top: 50px;
-  background: #0c1433;
-  padding: 25px;
-  border-radius: 10px;
+.aluno{
+color:#e50914;
+font-weight:bold;
 }
 
-.pix-key {
-  margin-top: 10px;
-  background: #060b1e;
-  padding: 12px;
-  border-radius: 6px;
-  font-size: 14px;
-  word-break: break-all;
+/* HERO */
+.hero{
+height:60vh;
+background:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c') center/cover;
+display:flex;
+align-items:center;
+padding-left:80px;
+font-size:40px;
+font-weight:bold;
 }
 
-.footer-btn {
-  margin-top: 40px;
+/* CATEGORIAS */
+.section{
+padding:40px 80px;
 }
 
-.copy-msg {
-  margin-top: 10px;
-  color: #00ffcc;
-  font-size: 14px;
-  display: none;
+.section h2{
+margin-bottom:20px;
+}
+
+.cards{
+display:flex;
+overflow-x:auto;
+gap:20px;
+padding-bottom:20px;
+}
+
+.card{
+min-width:250px;
+height:150px;
+border-radius:15px;
+background-size:cover;
+background-position:center;
+position:relative;
+cursor:pointer;
+transition:.4s;
+transform-style:preserve-3d;
+}
+
+.card:hover{
+transform:scale(1.1) rotateY(10deg);
+}
+
+.card::after{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
+border-radius:15px;
+}
+
+.card span{
+position:absolute;
+bottom:10px;
+left:15px;
+z-index:2;
+font-weight:bold;
+}
+
+/* PARTÍCULAS */
+#particles{
+position:fixed;
+width:100%;
+height:100%;
+z-index:-1;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <h1>NextMind Cursos</h1>
-  <p class="subtitle">Acesso completo a centenas de cursos premium</p>
+<div id="loader">
+<div class="loader-logo">TESLA CURSOS</div>
+</div>
 
-  <div class="plans">
+<div id="particles"></div>
 
-    <!-- PLANO MENSAL -->
-    <div class="plan">
-      <h2>Plano Mensal</h2>
-      <div class="price">R$ 14,99</div>
-      <p>Acesso total por 30 dias</p>
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-      <a class="btn"
-        href="https://wa.me/5513988238928?text=Olá!%20Paguei%20o%20PLANO%20MENSAL.%0A%0A📌%20WhatsApp:%0A📌%20Gmail:%0A📎%20Segue%20o%20comprovante:"
-        target="_blank">
-        Enviar comprovante
-      </a>
-    </div>
+<div class="sidebar" id="sidebar">
+<h2>Menu</h2>
+<a href="#">Início</a>
+<a href="#">Meus Cursos</a>
+<a href="#">Suporte</a>
+<a href="#">Sair</a>
+</div>
 
-    <!-- PLANO ANUAL -->
-    <div class="plan">
-      <h2>Plano Anual</h2>
-      <div class="price">R$ 129,90</div>
-      <p>Economia máxima + acesso por 1 ano</p>
+<header>
+<h1>Área Premium</h1>
+<div class="aluno">Bem-vindo, Carlos</div>
+</header>
 
-      <a class="btn"
-        href="https://wa.me/5513988238928?text=Olá!%20Paguei%20o%20PLANO%20ANUAL.%0A%0A📌%20WhatsApp:%0A📌%20Gmail:%0A📎%20Segue%20o%20comprovante:"
-        target="_blank">
-        Enviar comprovante
-      </a>
-    </div>
+<div class="hero">
+Explore Todos os Cursos
+</div>
 
-  </div>
+<div class="section">
+<h2>📚 Categorias</h2>
+<div class="cards">
 
-  <!-- PIX -->
-  <div class="pix-box">
-    <h3>🔑 Pagamento via PIX</h3>
-    <p>Chave PIX:</p>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA')" style="background-image:url('https://images.unsplash.com/photo-1559027615-cd4628902d4a')">
+<span>Art Digital & Design</span>
+</div>
 
-    <div class="pix-key" id="pixKey">
-      kbmm40245@gmail.com
-    </div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC')" style="background-image:url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed')">
+<span>Artes Marciais</span>
+</div>
 
-    <button class="btn" onclick="copiarPix()">
-      Copiar chave PIX
-    </button>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu')" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f')">
+<span>Financeiro</span>
+</div>
 
-    <div class="copy-msg" id="copyMsg">
-      ✅ Chave PIX copiada com sucesso!
-    </div>
-  </div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r')" style="background-image:url('https://images.unsplash.com/photo-1490645935967-10de6ba17061')">
+<span>Culinária</span>
+</div>
 
-  <!-- LOGIN -->
-  <div class="footer-btn">
-    <a href="login.html" class="btn">
-      Já sou aluno • Entrar
-    </a>
-  </div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r')" style="background-image:url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65')">
+<span>Religião</span>
+</div>
+
+</div>
 </div>
 
 <script>
-function copiarPix() {
-  const chave = document.getElementById("pixKey").innerText;
-
-  navigator.clipboard.writeText(chave).then(function() {
-    const msg = document.getElementById("copyMsg");
-    msg.style.display = "block";
-
-    setTimeout(() => {
-      msg.style.display = "none";
-    }, 3000);
-  });
+function toggleMenu(){
+document.getElementById('sidebar').classList.toggle('active');
 }
+
+function abrir(link){
+window.open(link,'_blank');
+}
+
+/* PARTÍCULAS */
+const canvas=document.createElement('canvas');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+document.getElementById('particles').appendChild(canvas);
+const ctx=canvas.getContext('2d');
+
+let particles=[];
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+d:Math.random()*1
+});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="rgba(255,255,255,0.3)";
+particles.forEach(p=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fill();
+p.y+=p.d;
+if(p.y>canvas.height)p.y=0;
+});
+requestAnimationFrame(draw);
+}
+draw();
 </script>
 
 </body>
 </html>
-
-</body>
-</html>
-
