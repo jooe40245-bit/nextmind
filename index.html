@@ -14,15 +14,13 @@
 }
 
 body{
-    height:100vh;
+    min-height:100vh;
     background: radial-gradient(circle at center, #0a0f2c 0%, #02040f 70%);
-    overflow:hidden;
     color:white;
-    display:flex;
-    flex-direction:column;
+    overflow-x:hidden;
 }
 
-/* FUNDO ESTRELAS */
+/* FUNDO */
 canvas{
     position:fixed;
     top:0;
@@ -40,19 +38,17 @@ canvas{
     text-shadow:0 0 15px #00f0ff;
 }
 
-/* CONTAINER 3D */
+/* GRID */
 .container{
-    flex:1;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:50px;
+    padding:40px 60px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:40px;
     perspective:1200px;
 }
 
-/* CARD FUTURISTA */
+/* CARD */
 .card{
-    width:260px;
     height:180px;
     border-radius:20px;
     background:rgba(255,255,255,0.05);
@@ -66,34 +62,21 @@ canvas{
     justify-content:center;
     text-align:center;
     cursor:pointer;
-    transition:transform .2s ease;
+    transition:transform .2s ease, box-shadow .3s;
     transform-style:preserve-3d;
     position:relative;
 }
 
-/* LUZ INTERNA */
-.card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:20px;
-    background:linear-gradient(120deg, transparent, rgba(0,255,255,0.15), transparent);
-    transform:translateZ(40px);
-}
-
-/* TEXTO */
 .card h2{
-    transform:translateZ(50px);
-    font-size:18px;
-    letter-spacing:1px;
+    transform:translateZ(40px);
     color:#00f0ff;
+    font-size:18px;
 }
 
-/* BRILHO HOVER */
 .card:hover{
     box-shadow:
-        0 0 40px rgba(0,255,255,0.7),
-        inset 0 0 25px rgba(0,255,255,0.3);
+        0 0 40px rgba(0,255,255,0.8),
+        inset 0 0 30px rgba(0,255,255,0.3);
 }
 </style>
 </head>
@@ -102,27 +85,42 @@ canvas{
 
 <canvas id="stars"></canvas>
 
-<div class="topo">NEXTMIND • FUTURE INTERFACE</div>
+<div class="topo">NEXTMIND • FUTURE PLATFORM</div>
 
 <div class="container">
 
-<div class="card">
-    <h2>Art Digital</h2>
-</div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA')"><h2>Art Digital & Design</h2></div>
 
-<div class="card">
-    <h2>Financeiro</h2>
-</div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC')"><h2>Artes Marciais</h2></div>
 
-<div class="card">
-    <h2>Inteligência Artificial</h2>
-</div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu')"><h2>Financeiro</h2></div>
+
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r')"><h2>Culinária</h2></div>
+
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1rDBhTTxD3pc5kp-ljWQ5zzBldzbdYC81')"><h2>Estudos</h2></div>
+
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/12DbWmPDFcgs_mM_R6cCSrxrHejiBIMOG')"><h2>Inteligência Artificial</h2></div>
+
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1ywrWcyyZHdmpDkUXz4_OdfnU5o8sPk1E')"><h2>Saúde</h2></div>
+
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1cGdn-RRV0rMbU_RLtFbA3MBiw1hphFGW')"><h2>Marketing Digital</h2></div>
+
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r')"><h2>Religião & Espiritualidade</h2></div>
+
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1xsdJ-26VD-guYSj7Kq_ITJVXcwlxKfAD')"><h2>Tesla Treinamentos</h2></div>
+
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/123z-XyT10UInmh1tbz3IiD0Aap3Q2QMg')"><h2>Diversos</h2></div>
 
 </div>
 
 <script>
 
-/* ===== FUNDO ESTRELAS ===== */
+/* ABRIR DRIVE */
+function abrir(link){
+    window.open(link,'_blank');
+}
+
+/* FUNDO ESTRELAS */
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 
@@ -130,7 +128,6 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let stars = [];
-
 for(let i=0;i<200;i++){
     stars.push({
         x:Math.random()*canvas.width,
@@ -154,7 +151,7 @@ function drawStars(){
 }
 drawStars();
 
-/* ===== EFEITO 3D SEGUINDO MOUSE ===== */
+/* EFEITO 3D */
 document.querySelectorAll(".card").forEach(card=>{
     card.addEventListener("mousemove",(e)=>{
         let rect = card.getBoundingClientRect();
@@ -164,8 +161,8 @@ document.querySelectorAll(".card").forEach(card=>{
         let centerX = rect.width/2;
         let centerY = rect.height/2;
 
-        let rotateX = -(y-centerY)/15;
-        let rotateY = (x-centerX)/15;
+        let rotateX = -(y-centerY)/20;
+        let rotateY = (x-centerX)/20;
 
         card.style.transform =
             `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
