@@ -3,133 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextMind Cursos</title>
+<title>NextMind 3D</title>
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 body{
-    background: linear-gradient(135deg,#021024,#03254c,#054a91);
-    background-size:400% 400%;
-    animation: fundoAnimado 12s ease infinite;
+    height:100vh;
+    background: radial-gradient(circle at center, #0a0f2c 0%, #02040f 70%);
+    overflow:hidden;
     color:white;
-    overflow-x:hidden;
+    display:flex;
+    flex-direction:column;
 }
 
-@keyframes fundoAnimado{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
+/* FUNDO ESTRELAS */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
 }
 
 /* TOPO */
 .topo{
-    padding:25px 50px;
+    padding:30px 60px;
     font-size:28px;
     font-weight:bold;
-    letter-spacing:2px;
+    letter-spacing:3px;
+    color:#00f0ff;
+    text-shadow:0 0 15px #00f0ff;
 }
 
-.logo{
-    color:#00c3ff;
-}
-
-/* CONTAINER */
+/* CONTAINER 3D */
 .container{
-    padding:40px 60px;
+    flex:1;
     display:flex;
-    flex-wrap:wrap;
-    gap:40px;
     justify-content:center;
+    align-items:center;
+    gap:50px;
+    perspective:1200px;
 }
 
-/* CATEGORIA CARD */
-.categoria{
-    width:280px;
-    height:170px;
-    border-radius:18px;
-    backdrop-filter:blur(12px);
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.15);
-    box-shadow:0 0 25px rgba(0,195,255,0.3);
+/* CARD FUTURISTA */
+.card{
+    width:260px;
+    height:180px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(0,255,255,0.2);
+    box-shadow:
+        0 0 20px rgba(0,255,255,0.3),
+        inset 0 0 20px rgba(0,255,255,0.1);
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
     cursor:pointer;
-    transition:0.4s;
+    transition:transform .2s ease;
+    transform-style:preserve-3d;
     position:relative;
-    animation: flutuar 5s ease-in-out infinite;
 }
 
-.categoria:hover{
-    transform:translateY(-10px) scale(1.05);
-    box-shadow:0 0 40px rgba(0,195,255,0.7);
+/* LUZ INTERNA */
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:20px;
+    background:linear-gradient(120deg, transparent, rgba(0,255,255,0.15), transparent);
+    transform:translateZ(40px);
 }
 
 /* TEXTO */
-.categoria h2{
-    font-size:20px;
-    z-index:2;
+.card h2{
+    transform:translateZ(50px);
+    font-size:18px;
+    letter-spacing:1px;
+    color:#00f0ff;
 }
 
-/* FLUTUAR */
-@keyframes flutuar{
-    0%{transform:translateY(0px);}
-    50%{transform:translateY(-10px);}
-    100%{transform:translateY(0px);}
-}
-
-/* RESPONSIVO */
-@media(max-width:768px){
-    .container{
-        padding:20px;
-    }
-    .categoria{
-        width:100%;
-    }
+/* BRILHO HOVER */
+.card:hover{
+    box-shadow:
+        0 0 40px rgba(0,255,255,0.7),
+        inset 0 0 25px rgba(0,255,255,0.3);
 }
 </style>
 </head>
+
 <body>
 
-<div class="topo">
-    <div class="logo">NEXTMIND</div>
-</div>
+<canvas id="stars"></canvas>
+
+<div class="topo">NEXTMIND • FUTURE INTERFACE</div>
 
 <div class="container">
 
-    <div class="categoria" onclick="abrir('https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA')">
-        <h2>Art Digital & Design</h2>
-    </div>
+<div class="card">
+    <h2>Art Digital</h2>
+</div>
 
-    <div class="categoria" onclick="abrir('https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC')">
-        <h2>Artes Marciais</h2>
-    </div>
+<div class="card">
+    <h2>Financeiro</h2>
+</div>
 
-    <div class="categoria" onclick="abrir('https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu')">
-        <h2>Financeiro</h2>
-    </div>
-
-    <div class="categoria" onclick="abrir('https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r')">
-        <h2>Culinária</h2>
-    </div>
-
-    <div class="categoria" onclick="abrir('https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r')">
-        <h2>Religião</h2>
-    </div>
+<div class="card">
+    <h2>Inteligência Artificial</h2>
+</div>
 
 </div>
 
 <script>
-function abrir(link){
-    window.open(link, '_blank');
+
+/* ===== FUNDO ESTRELAS ===== */
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = [];
+
+for(let i=0;i<200;i++){
+    stars.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*1.5,
+        d:Math.random()*0.5
+    });
 }
+
+function drawStars(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="white";
+    stars.forEach(s=>{
+        ctx.beginPath();
+        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fill();
+        s.y+=s.d;
+        if(s.y>canvas.height) s.y=0;
+    });
+    requestAnimationFrame(drawStars);
+}
+drawStars();
+
+/* ===== EFEITO 3D SEGUINDO MOUSE ===== */
+document.querySelectorAll(".card").forEach(card=>{
+    card.addEventListener("mousemove",(e)=>{
+        let rect = card.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        let y = e.clientY - rect.top;
+
+        let centerX = rect.width/2;
+        let centerY = rect.height/2;
+
+        let rotateX = -(y-centerY)/15;
+        let rotateY = (x-centerX)/15;
+
+        card.style.transform =
+            `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    card.addEventListener("mouseleave",()=>{
+        card.style.transform="rotateX(0) rotateY(0)";
+    });
+});
+
 </script>
 
 </body>
