@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextMind • Cinematic Interface</title>
+<title>NextMind • Holographic Core</title>
 
 <style>
 *{
@@ -20,7 +20,6 @@ body{
     color:white;
 }
 
-/* FUNDO ESPACIAL */
 canvas{
     position:fixed;
     top:0;
@@ -28,7 +27,6 @@ canvas{
     z-index:-3;
 }
 
-/* CAMERA */
 .scene{
     width:100%;
     height:100vh;
@@ -36,13 +34,11 @@ canvas{
     justify-content:center;
     align-items:center;
     perspective:2000px;
-    overflow:hidden;
 }
 
-/* INTERFACE PRINCIPAL */
 .interface{
-    width:85%;
-    height:80vh;
+    width:90%;
+    height:85vh;
     border-radius:35px;
     position:relative;
     padding:40px;
@@ -54,22 +50,15 @@ canvas{
         0 0 100px rgba(0,255,255,0.3),
         inset 0 0 100px rgba(0,255,255,0.2);
     animation:cameraFloat 15s ease-in-out infinite alternate;
+    overflow:auto;
 }
 
-/* CAMERA FLUTUANDO */
 @keyframes cameraFloat{
-    0%{
-        transform:rotateX(6deg) rotateY(-6deg) translateZ(0px);
-    }
-    50%{
-        transform:rotateX(-4deg) rotateY(5deg) translateZ(60px);
-    }
-    100%{
-        transform:rotateX(6deg) rotateY(-6deg) translateZ(0px);
-    }
+    0%{ transform:rotateX(6deg) rotateY(-6deg) translateZ(0px); }
+    50%{ transform:rotateX(-4deg) rotateY(5deg) translateZ(60px); }
+    100%{ transform:rotateX(6deg) rotateY(-6deg) translateZ(0px); }
 }
 
-/* BRILHO HOLOGRÁFICO INTERNO */
 .interface::before{
     content:"";
     position:absolute;
@@ -88,7 +77,6 @@ canvas{
     100%{ transform:translateX(100%); }
 }
 
-/* TÍTULO */
 .topo{
     font-size:22px;
     letter-spacing:4px;
@@ -97,14 +85,12 @@ canvas{
     margin-bottom:30px;
 }
 
-/* GRID */
 .grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:30px;
+    gap:25px;
 }
 
-/* CARD */
 .card{
     border-radius:20px;
     padding:20px;
@@ -117,7 +103,6 @@ canvas{
         0 0 30px rgba(0,255,255,0.3),
         inset 0 0 20px rgba(0,255,255,0.15);
     transition:.3s;
-    transform-style:preserve-3d;
 }
 
 .card:hover{
@@ -129,15 +114,7 @@ canvas{
 
 .card h2{
     color:#00f0ff;
-    font-size:15px;
-}
-
-/* RESPONSIVO */
-@media(max-width:768px){
-    .interface{
-        width:95%;
-        height:auto;
-    }
+    font-size:14px;
 }
 </style>
 </head>
@@ -153,27 +130,28 @@ canvas{
 
 <div class="grid">
 
-<div class="card" onclick="abrir('https://drive.google.com/')"><h2>Art Digital & Design</h2></div>
-<div class="card" onclick="abrir('https://drive.google.com/')"><h2>Artes Marciais</h2></div>
-<div class="card" onclick="abrir('https://drive.google.com/')"><h2>Financeiro</h2></div>
-<div class="card" onclick="abrir('https://drive.google.com/')"><h2>Culinária</h2></div>
-<div class="card" onclick="abrir('https://drive.google.com/')"><h2>Estudos</h2></div>
-<div class="card" onclick="abrir('https://drive.google.com/')"><h2>Inteligência Artificial</h2></div>
-<div class="card" onclick="abrir('https://drive.google.com/')"><h2>Saúde</h2></div>
-<div class="card" onclick="abrir('https://drive.google.com/')"><h2>Marketing Digital</h2></div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA')"><h2>Art Digital & Design</h2></div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC')"><h2>Artes Marciais</h2></div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu')"><h2>Financeiro</h2></div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r')"><h2>Culinária</h2></div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1rDBhTTxD3pc5kp-ljWQ5zzBldzbdYC81')"><h2>Estudos</h2></div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/12DbWmPDFcgs_mM_R6cCSrxrHejiBIMOG')"><h2>Inteligência Artificial</h2></div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1ywrWcyyZHdmpDkUXz4_OdfnU5o8sPk1E')"><h2>Saúde</h2></div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1cGdn-RRV0rMbU_RLtFbA3MBiw1hphFGW')"><h2>Marketing Digital</h2></div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r')"><h2>Religião & Espiritualidade</h2></div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1xsdJ-26VD-guYSj7Kq_ITJVXcwlxKfAD')"><h2>Tesla Treinamentos</h2></div>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/123z-XyT10UInmh1tbz3IiD0Aap3Q2QMg')"><h2>Diversos</h2></div>
 
 </div>
 </div>
 </div>
 
 <script>
-
-/* ABRIR LINK */
 function abrir(link){
     window.open(link,'_blank');
 }
 
-/* FUNDO ESTRELAS COM PROFUNDIDADE */
+/* FUNDO ESTRELAS */
 const canvas=document.getElementById("stars");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
@@ -182,8 +160,8 @@ canvas.height=window.innerHeight;
 let stars=[];
 for(let i=0;i<400;i++){
     stars.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
+        x:Math.random()*canvas.width-canvas.width/2,
+        y:Math.random()*canvas.height-canvas.height/2,
         z:Math.random()*canvas.width
     });
 }
@@ -195,8 +173,8 @@ function animate(){
     stars.forEach(s=>{
         s.z-=2;
         if(s.z<=0){
-            s.x=Math.random()*canvas.width;
-            s.y=Math.random()*canvas.height;
+            s.x=Math.random()*canvas.width-canvas.width/2;
+            s.y=Math.random()*canvas.height-canvas.height/2;
             s.z=canvas.width;
         }
 
@@ -214,7 +192,6 @@ function animate(){
     requestAnimationFrame(animate);
 }
 animate();
-
 </script>
 
 </body>
