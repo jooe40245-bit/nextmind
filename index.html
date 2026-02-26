@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextMind • Holographic Core</title>
+<title>NextMind • Cinematic Holographic System</title>
 
 <style>
 *{
@@ -16,17 +16,21 @@
 body{
     height:100vh;
     overflow:hidden;
-    background:#030611;
+    background:#000814;
     color:white;
 }
 
-canvas{
+/* FUNDO */
+#space{
     position:fixed;
     top:0;
     left:0;
-    z-index:-3;
+    width:100%;
+    height:100%;
+    z-index:-5;
 }
 
+/* CENA 3D */
 .scene{
     width:100%;
     height:100vh;
@@ -36,29 +40,32 @@ canvas{
     perspective:2000px;
 }
 
+/* PAINEL HOLOGRÁFICO */
 .interface{
     width:90%;
     height:85vh;
     border-radius:35px;
-    position:relative;
     padding:40px;
+    position:relative;
     transform-style:preserve-3d;
     backdrop-filter:blur(40px);
     background:rgba(0,255,255,0.05);
     border:1px solid rgba(0,255,255,0.3);
     box-shadow:
-        0 0 100px rgba(0,255,255,0.3),
-        inset 0 0 100px rgba(0,255,255,0.2);
-    animation:cameraFloat 15s ease-in-out infinite alternate;
+        0 0 120px rgba(0,255,255,0.3),
+        inset 0 0 120px rgba(0,255,255,0.2);
+    animation:cameraFloat 18s ease-in-out infinite alternate;
     overflow:auto;
 }
 
+/* MOVIMENTO DA CÂMERA */
 @keyframes cameraFloat{
     0%{ transform:rotateX(6deg) rotateY(-6deg) translateZ(0px); }
-    50%{ transform:rotateX(-4deg) rotateY(5deg) translateZ(60px); }
+    50%{ transform:rotateX(-4deg) rotateY(5deg) translateZ(70px); }
     100%{ transform:rotateX(6deg) rotateY(-6deg) translateZ(0px); }
 }
 
+/* BRILHO HOLOGRÁFICO */
 .interface::before{
     content:"";
     position:absolute;
@@ -106,7 +113,7 @@ canvas{
 }
 
 .card:hover{
-    transform:translateZ(40px) scale(1.05);
+    transform:translateZ(40px) scale(1.07);
     box-shadow:
         0 0 70px rgba(0,255,255,0.9),
         inset 0 0 40px rgba(0,255,255,0.3);
@@ -121,7 +128,7 @@ canvas{
 
 <body>
 
-<canvas id="stars"></canvas>
+<canvas id="space"></canvas>
 
 <div class="scene">
 <div class="interface">
@@ -151,47 +158,79 @@ function abrir(link){
     window.open(link,'_blank');
 }
 
-/* FUNDO ESTRELAS */
-const canvas=document.getElementById("stars");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+/* FUNDO CINEMATOGRÁFICO */
+const canvas = document.getElementById("space");
+const ctx = canvas.getContext("2d");
 
-let stars=[];
-for(let i=0;i<400;i++){
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let nebulaOffset = 0;
+let stars = [];
+
+for(let i=0;i<700;i++){
     stars.push({
-        x:Math.random()*canvas.width-canvas.width/2,
-        y:Math.random()*canvas.height-canvas.height/2,
+        x:Math.random()*canvas.width - canvas.width/2,
+        y:Math.random()*canvas.height - canvas.height/2,
         z:Math.random()*canvas.width
     });
 }
 
-function animate(){
-    ctx.fillStyle="#030611";
+function drawNebula(){
+    const gradient = ctx.createRadialGradient(
+        canvas.width/2 + Math.sin(nebulaOffset)*250,
+        canvas.height/2 + Math.cos(nebulaOffset)*250,
+        100,
+        canvas.width/2,
+        canvas.height/2,
+        canvas.width
+    );
+
+    gradient.addColorStop(0,"rgba(0,255,255,0.2)");
+    gradient.addColorStop(0.3,"rgba(120,0,255,0.15)");
+    gradient.addColorStop(0.6,"rgba(0,0,80,0.4)");
+    gradient.addColorStop(1,"rgba(0,0,0,1)");
+
+    ctx.fillStyle = gradient;
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
+    nebulaOffset += 0.0015;
+}
+
+function drawStars(){
     stars.forEach(s=>{
-        s.z-=2;
-        if(s.z<=0){
-            s.x=Math.random()*canvas.width-canvas.width/2;
-            s.y=Math.random()*canvas.height-canvas.height/2;
-            s.z=canvas.width;
+        s.z -= 2;
+        if(s.z <= 0){
+            s.x = Math.random()*canvas.width - canvas.width/2;
+            s.y = Math.random()*canvas.height - canvas.height/2;
+            s.z = canvas.width;
         }
 
-        let k=128/s.z;
-        let px=s.x*k+canvas.width/2;
-        let py=s.y*k+canvas.height/2;
+        let k = 128/s.z;
+        let px = s.x*k + canvas.width/2;
+        let py = s.y*k + canvas.height/2;
 
-        if(px>=0&&px<=canvas.width&&py>=0&&py<=canvas.height){
-            let size=(1-k)*2;
+        if(px>=0 && px<=canvas.width && py>=0 && py<=canvas.height){
+            let size = (1-k)*2;
             ctx.fillStyle="white";
             ctx.fillRect(px,py,size,size);
         }
     });
+}
 
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    drawNebula();
+    drawStars();
     requestAnimationFrame(animate);
 }
+
 animate();
+
+window.addEventListener("resize",()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
 </script>
 
 </body>
