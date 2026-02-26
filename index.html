@@ -3,181 +3,159 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextMind 3D Experience</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<title>NextMind AI Platform</title>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
 }
 
 body{
-    overflow:hidden;
-    background:#000;
-    color:white;
+min-height:100vh;
+background:
+linear-gradient(rgba(0,0,20,0.8), rgba(0,0,20,0.9)),
+url('https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2000&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+color:white;
+overflow-x:hidden;
 }
 
-/* CANVAS 3D */
-#bg{
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:-2;
+/* CAMADA HOLOGRÁFICA */
+.overlay{
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(circle at 30% 40%, rgba(0,255,255,0.15), transparent 40%),
+radial-gradient(circle at 70% 60%, rgba(0,140,255,0.15), transparent 40%);
+pointer-events:none;
+z-index:0;
+animation:glowMove 10s infinite alternate ease-in-out;
+}
+
+@keyframes glowMove{
+0%{transform:scale(1);}
+100%{transform:scale(1.1);}
 }
 
 /* CONTAINER */
 .container{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:90%;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:30px;
+position:relative;
+z-index:2;
+padding:60px 5%;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:30px;
 }
 
 /* CARD */
 .card{
-    height:180px;
-    border-radius:20px;
-    overflow:hidden;
-    cursor:pointer;
-    position:relative;
-    transition:.5s;
-    transform-style:preserve-3d;
-    box-shadow:0 20px 40px rgba(0,0,0,.6);
+height:200px;
+border-radius:20px;
+overflow:hidden;
+cursor:pointer;
+position:relative;
+transition:.5s;
+transform-style:preserve-3d;
+background-size:cover;
+background-position:center;
+box-shadow:0 20px 50px rgba(0,0,0,0.7);
 }
 
-.card img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    filter:brightness(60%);
-    transition:.5s;
+.card::before{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
 }
 
 .card h2{
-    position:absolute;
-    bottom:20px;
-    left:20px;
-    z-index:2;
-    font-size:18px;
-    text-shadow:0 0 15px cyan;
+position:absolute;
+bottom:20px;
+left:20px;
+z-index:2;
+font-size:18px;
+text-shadow:0 0 20px cyan;
 }
 
 .card:hover{
-    transform:rotateY(15deg) rotateX(10deg) scale(1.1);
+transform:scale(1.08) rotateY(8deg);
+box-shadow:0 0 40px cyan;
 }
 
-.card:hover img{
-    filter:brightness(100%);
+/* TÍTULO */
+.topo{
+padding:30px 5%;
+font-size:28px;
+font-weight:bold;
+letter-spacing:3px;
+text-shadow:0 0 15px cyan;
 }
 
-/* overlay brilho */
-.card::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:linear-gradient(120deg,transparent,rgba(0,255,255,0.4),transparent);
-    transform:translateX(-100%);
-    transition:.5s;
-}
-
-.card:hover::after{
-    transform:translateX(100%);
-}
 </style>
 </head>
-
 <body>
 
-<canvas id="bg"></canvas>
+<div class="overlay"></div>
+
+<div class="topo">NEXTMIND • AI EXPERIENCE</div>
 
 <div class="container">
 
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA')">
-<img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262">
-<h2>Art Digital</h2>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA')" style="background-image:url('https://images.unsplash.com/photo-1541961017774-22349e4a1262')">
+<h2>Art Digital & Design</h2>
 </div>
 
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC')">
-<img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed">
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC')" style="background-image:url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed')">
 <h2>Artes Marciais</h2>
 </div>
 
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu')">
-<img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f">
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu')" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f')">
 <h2>Financeiro</h2>
 </div>
 
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r')">
-<img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352">
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r')" style="background-image:url('https://images.unsplash.com/photo-1498837167922-ddd27525d352')">
 <h2>Culinária</h2>
 </div>
 
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/12DbWmPDFcgs_mM_R6cCSrxrHejiBIMOG')">
-<img src="https://images.unsplash.com/photo-1677442136019-21780ecad995">
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1rDBhTTxD3pc5kp-ljWQ5zzBldzbdYC81')" style="background-image:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644')">
+<h2>Estudos</h2>
+</div>
+
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/12DbWmPDFcgs_mM_R6cCSrxrHejiBIMOG')" style="background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995')">
 <h2>Inteligência Artificial</h2>
 </div>
 
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1cGdn-RRV0rMbU_RLtFbA3MBiw1hphFGW')">
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f">
-<h2>Marketing</h2>
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1ywrWcyyZHdmpDkUXz4_OdfnU5o8sPk1E')" style="background-image:url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5')">
+<h2>Saúde</h2>
+</div>
+
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1cGdn-RRV0rMbU_RLtFbA3MBiw1hphFGW')" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f')">
+<h2>Marketing Digital</h2>
+</div>
+
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r')" style="background-image:url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65')">
+<h2>Religião & Espiritualidade</h2>
+</div>
+
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1xsdJ-26VD-guYSj7Kq_ITJVXcwlxKfAD')" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475')">
+<h2>Tesla Treinamentos</h2>
+</div>
+
+<div class="card" onclick="abrir('https://drive.google.com/drive/folders/123z-XyT10UInmh1tbz3IiD0Aap3Q2QMg')" style="background-image:url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d')">
+<h2>Diversos</h2>
 </div>
 
 </div>
 
 <script>
 function abrir(link){
-    window.open(link,'_blank');
+window.open(link,'_blank');
 }
-
-/* THREE JS FUNDO 3D */
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({canvas:document.getElementById('bg'), alpha:true});
-renderer.setSize(window.innerWidth, window.innerHeight);
-
-camera.position.z = 5;
-
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshStandardMaterial({color:0x00ffff, wireframe:true});
-const cubes = [];
-
-for(let i=0;i<40;i++){
-    const cube = new THREE.Mesh(geometry, material);
-    cube.position.x = (Math.random()-0.5)*20;
-    cube.position.y = (Math.random()-0.5)*20;
-    cube.position.z = (Math.random()-0.5)*20;
-    scene.add(cube);
-    cubes.push(cube);
-}
-
-const light = new THREE.PointLight(0x00ffff, 2);
-light.position.set(10,10,10);
-scene.add(light);
-
-function animate(){
-    requestAnimationFrame(animate);
-    cubes.forEach(c=>{
-        c.rotation.x += 0.01;
-        c.rotation.y += 0.01;
-    });
-    renderer.render(scene, camera);
-}
-
-animate();
-
-window.addEventListener('resize',()=>{
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth/window.innerHeight;
-    camera.updateProjectionMatrix();
-});
 </script>
 
 </body>
