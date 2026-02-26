@@ -64,22 +64,21 @@ body{
     cursor:pointer;
     transition:0.4s;
     position:relative;
+    animation: flutuar 5s ease-in-out infinite;
 }
 
 .categoria:hover{
     transform:translateY(-10px) scale(1.05);
-    box-shadow:0 0 40px rgba(0,195,255,0.6);
+    box-shadow:0 0 40px rgba(0,195,255,0.7);
 }
 
+/* TEXTO */
 .categoria h2{
     font-size:20px;
+    z-index:2;
 }
 
-/* EFEITO FLUTUANTE */
-.categoria{
-    animation: flutuar 5s ease-in-out infinite;
-}
-
+/* FLUTUAR */
 @keyframes flutuar{
     0%{transform:translateY(0px);}
     50%{transform:translateY(-10px);}
@@ -105,39 +104,33 @@ body{
 
 <div class="container">
 
-    <div class="categoria">
+    <div class="categoria" onclick="abrir('https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA')">
         <h2>Art Digital & Design</h2>
     </div>
 
-    <div class="categoria">
+    <div class="categoria" onclick="abrir('https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC')">
         <h2>Artes Marciais</h2>
     </div>
 
-    <div class="categoria">
+    <div class="categoria" onclick="abrir('https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu')">
         <h2>Financeiro</h2>
     </div>
 
-    <div class="categoria">
+    <div class="categoria" onclick="abrir('https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r')">
         <h2>Culinária</h2>
     </div>
 
-    <div class="categoria">
+    <div class="categoria" onclick="abrir('https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r')">
         <h2>Religião</h2>
     </div>
 
-    <div class="categoria">
-        <h2>Marketing Digital</h2>
-    </div>
-
-    <div class="categoria">
-        <h2>Programação</h2>
-    </div>
-
-    <div class="categoria">
-        <h2>Idiomas</h2>
-    </div>
-
 </div>
+
+<script>
+function abrir(link){
+    window.open(link, '_blank');
+}
+</script>
 
 </body>
 </html>
