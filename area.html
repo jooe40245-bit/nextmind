@@ -6,169 +6,193 @@
 <title>Área do Aluno</title>
 
 <style>
+
 body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    background:#0b0f1a;
-    color:white;
+margin:0;
+font-family:Arial, sans-serif;
+background:#0b0f1a;
+color:white;
 }
 
 /* ===== BANNER ===== */
+
 .banner{
-    height:80vh;
-    background:linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.3)),
-    url('https://images.unsplash.com/photo-1492724441997-5dc865305da7');
-    background-size:cover;
-    background-position:center;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding:0 80px;
+height:80vh;
+background:linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.4)),
+url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=2000&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:0 80px;
 }
 
 .banner h1{
-    font-size:60px;
-    margin:0;
+font-size:60px;
+margin:0;
 }
 
 .banner p{
-    font-size:20px;
-    max-width:600px;
-    margin-top:20px;
+font-size:20px;
+max-width:600px;
+margin-top:20px;
 }
 
 .banner button{
-    margin-top:30px;
-    padding:15px 35px;
-    font-size:18px;
-    background:#22d3ee;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
+margin-top:30px;
+padding:15px 35px;
+font-size:18px;
+background:#22d3ee;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
 }
 
-/* ===== CATEGORIAS ===== */
+/* ===== CONTAINER ===== */
+
 .container{
-    padding:50px 80px;
+padding:60px 80px;
 }
 
 .categorias{
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap:30px;
+display:grid;
+grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
+gap:30px;
 }
 
+/* ===== CARD BASE ===== */
+
 .card{
-    height:180px;
-    border-radius:15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-    font-weight:bold;
-    text-align:center;
-    transition:0.4s;
-    cursor:pointer;
-    text-decoration:none;
-    color:white;
+position:relative;
+height:200px;
+border-radius:15px;
+display:flex;
+align-items:flex-end;
+padding:20px;
+font-size:22px;
+font-weight:bold;
+text-decoration:none;
+color:white;
+overflow:hidden;
+background-size:cover;
+background-position:center;
+transition:0.4s;
+}
+
+.card::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
+}
+
+.card span{
+position:relative;
+z-index:2;
 }
 
 .card:hover{
-    transform:scale(1.05);
+transform:scale(1.05);
 }
 
-/* CORES PERSONALIZADAS */
-.design{background:linear-gradient(135deg,#1e3a8a,#2563eb);}
-.artes{background:linear-gradient(135deg,#7c2d12,#ea580c);}
-.financeiro{background:linear-gradient(135deg,#064e3b,#10b981);}
-.culinaria{background:linear-gradient(135deg,#78350f,#f59e0b);}
-.estudos{background:linear-gradient(135deg,#4c1d95,#8b5cf6);}
-.ia{background:linear-gradient(135deg,#0f172a,#22d3ee);}
-.saude{background:linear-gradient(135deg,#7f1d1d,#ef4444);}
-.marketing{background:linear-gradient(135deg,#1e293b,#38bdf8);}
-.religiao{background:linear-gradient(135deg,#292524,#a8a29e);}
-.tesla{background:linear-gradient(135deg,#111827,#6b7280);}
-.diversos{background:linear-gradient(135deg,#374151,#9ca3af);}
+/* ===== IMAGENS PERSONALIZADAS ===== */
+
+.design{
+background-image:url('https://images.unsplash.com/photo-1522199710521-72d69614c702?q=80&w=1600&auto=format&fit=crop');
+}
+
+.artes{
+background-image:url('https://images.unsplash.com/photo-1544717297-fa95b6ee9643?q=80&w=1600&auto=format&fit=crop');
+}
+
+.financeiro{
+background-image:url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1600&auto=format&fit=crop');
+}
+
+.culinaria{
+background-image:url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=1600&auto=format&fit=crop');
+}
+
+.estudos{
+background-image:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1600&auto=format&fit=crop');
+}
+
+.ia{
+background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1600&auto=format&fit=crop');
+}
+
+.saude{
+background-image:url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1600&auto=format&fit=crop');
+}
+
+.marketing{
+background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop');
+}
+
+.religiao{
+background-image:url('https://images.unsplash.com/photo-1507692049790-de58290a4334?q=80&w=1600&auto=format&fit=crop');
+}
+
+.tesla{
+background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop');
+}
+
+.diversos{
+background-image:url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1600&auto=format&fit=crop');
+}
 
 .sair{
-    text-align:center;
-    margin:60px 0;
+text-align:center;
+margin:60px 0;
 }
 
 .sair a{
-    background:#22d3ee;
-    padding:12px 30px;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:bold;
-    color:black;
+background:#22d3ee;
+padding:12px 30px;
+border-radius:8px;
+text-decoration:none;
+font-weight:bold;
+color:black;
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- BANNER -->
 <div class="banner">
-    <h1>Bem-vindo à Plataforma</h1>
-    <p>Explore todas as categorias disponíveis e tenha acesso aos melhores cursos organizados por área.</p>
-    <button onclick="window.scrollTo({top:800,behavior:'smooth'})">Explorar Cursos</button>
+<h1>Bem-vindo à Plataforma</h1>
+<p>Explore todas as categorias disponíveis e tenha acesso aos melhores cursos organizados por área.</p>
+<button onclick="window.scrollTo({top:800,behavior:'smooth'})">Explorar Cursos</button>
 </div>
 
-<!-- CATEGORIAS -->
 <div class="container">
-    <div class="categorias">
 
-        <a href="https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA" target="_blank" class="card design">
-        🎨 ARTDIGITAL - DESIGN
-        </a>
+<div class="categorias">
 
-        <a href="https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC" target="_blank" class="card artes">
-        🥋 ARTES MARCIAIS
-        </a>
+<a href="#" class="card design"><span>🎨 ARTDIGITAL - DESIGN</span></a>
+<a href="#" class="card artes"><span>🥋 ARTES MARCIAIS</span></a>
+<a href="#" class="card financeiro"><span>💰 FINANCEIRO</span></a>
+<a href="#" class="card culinaria"><span>🍳 CULINÁRIA</span></a>
+<a href="#" class="card estudos"><span>📚 ESTUDOS</span></a>
+<a href="#" class="card ia"><span>🤖 INTELIGÊNCIA ARTIFICIAL</span></a>
+<a href="#" class="card saude"><span>🏥 SAÚDE</span></a>
+<a href="#" class="card marketing"><span>📈 MARKETING DIGITAL</span></a>
+<a href="#" class="card religiao"><span>✝ RELIGIÃO</span></a>
+<a href="#" class="card tesla"><span>⚡ TESLA TREINAMENTOS</span></a>
+<a href="#" class="card diversos"><span>📦 DIVERSOS</span></a>
 
-        <a href="https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu" target="_blank" class="card financeiro">
-        💰 FINANCEIRO
-        </a>
+</div>
 
-        <a href="https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r" target="_blank" class="card culinaria">
-        🍳 CULINÁRIA
-        </a>
+<div class="sair">
+<a href="login.html">Sair</a>
+</div>
 
-        <a href="https://drive.google.com/drive/folders/1rDBhTTxD3pc5kp-ljWQ5zzBldzbdYC81" target="_blank" class="card estudos">
-        📚 ESTUDOS
-        </a>
-
-        <a href="https://drive.google.com/drive/folders/12DbWmPDFcgs_mM_R6cCSrxrHejiBIMOG" target="_blank" class="card ia">
-        🤖 IA
-        </a>
-
-        <a href="https://drive.google.com/drive/folders/1ywrWcyyZHdmpDkUXz4_OdfnU5o8sPk1E" target="_blank" class="card saude">
-        🏥 SAÚDE
-        </a>
-
-        <a href="https://drive.google.com/drive/folders/1cGdn-RRV0rMbU_RLtFbA3MBiw1hphFGW" target="_blank" class="card marketing">
-        📈 MARKETING DIGITAL
-        </a>
-
-        <a href="https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r" target="_blank" class="card religiao">
-        ✝ RELIGIÃO
-        </a>
-
-        <a href="https://drive.google.com/drive/folders/1xsdJ-26VD-guYSj7Kq_ITJVXcwlxKfAD" target="_blank" class="card tesla">
-        ⚡ TESLA TREINAMENTOS
-        </a>
-
-        <a href="https://drive.google.com/drive/folders/123z-XyT10UInmh1tbz3IiD0Aap3Q2QMg" target="_blank" class="card diversos">
-        📦 DIVERSOS
-        </a>
-
-    </div>
-
-    <div class="sair">
-        <a href="login.html">Sair</a>
-    </div>
 </div>
 
 </body>
