@@ -6,92 +6,94 @@
 <title>NextMind Cursos</title>
 
 <style>
-body{
+*{
     margin:0;
-    background:#0f0f0f;
+    padding:0;
+    box-sizing:border-box;
     font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg,#021024,#03254c,#054a91);
+    background-size:400% 400%;
+    animation: fundoAnimado 12s ease infinite;
     color:white;
     overflow-x:hidden;
 }
 
+@keyframes fundoAnimado{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
 /* TOPO */
 .topo{
-    background:linear-gradient(to bottom,#000,transparent);
-    padding:20px 40px;
-    position:fixed;
-    width:100%;
-    z-index:1000;
+    padding:25px 50px;
+    font-size:28px;
+    font-weight:bold;
+    letter-spacing:2px;
 }
 
 .logo{
-    font-size:28px;
-    font-weight:bold;
-    color:#e50914;
+    color:#00c3ff;
 }
 
-/* BANNER */
-.banner{
-    height:60vh;
-    background:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c') center/cover no-repeat;
+/* CONTAINER */
+.container{
+    padding:40px 60px;
     display:flex;
-    align-items:flex-end;
-    padding:40px;
+    flex-wrap:wrap;
+    gap:40px;
+    justify-content:center;
 }
 
-.banner h1{
-    font-size:50px;
-}
-
-/* CATEGORIAS */
+/* CATEGORIA CARD */
 .categoria{
-    padding:30px 40px;
+    width:280px;
+    height:170px;
+    border-radius:18px;
+    backdrop-filter:blur(12px);
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow:0 0 25px rgba(0,195,255,0.3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    cursor:pointer;
+    transition:0.4s;
+    position:relative;
+}
+
+.categoria:hover{
+    transform:translateY(-10px) scale(1.05);
+    box-shadow:0 0 40px rgba(0,195,255,0.6);
 }
 
 .categoria h2{
-    margin-bottom:15px;
+    font-size:20px;
 }
 
-/* LINHA DE CARDS */
-.linha{
-    display:flex;
-    gap:15px;
-    overflow-x:auto;
-    padding-bottom:10px;
+/* EFEITO FLUTUANTE */
+.categoria{
+    animation: flutuar 5s ease-in-out infinite;
 }
 
-.card{
-    min-width:220px;
-    height:130px;
-    border-radius:8px;
-    background-size:cover;
-    background-position:center;
-    position:relative;
-    transition:0.4s;
-    cursor:pointer;
+@keyframes flutuar{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0px);}
 }
 
-.card:hover{
-    transform:scale(1.1);
-    z-index:10;
-}
-
-/* TEXTO DO CARD */
-.card span{
-    position:absolute;
-    bottom:10px;
-    left:10px;
-    font-weight:bold;
-    background:rgba(0,0,0,0.6);
-    padding:5px 10px;
-    border-radius:4px;
-}
-
-/* SCROLL */
-.linha::-webkit-scrollbar{
-    height:8px;
-}
-.linha::-webkit-scrollbar-thumb{
-    background:#333;
+/* RESPONSIVO */
+@media(max-width:768px){
+    .container{
+        padding:20px;
+    }
+    .categoria{
+        width:100%;
+    }
 }
 </style>
 </head>
@@ -101,70 +103,40 @@ body{
     <div class="logo">NEXTMIND</div>
 </div>
 
-<div class="banner">
-    <h1>Aprenda Algo Novo Hoje</h1>
-</div>
+<div class="container">
 
-<!-- ART DIGITAL -->
-<div class="categoria">
-    <h2>Art Digital & Design</h2>
-    <div class="linha">
-        <div class="card" style="background-image:url('https://images.unsplash.com/photo-1492724441997-5dc865305da7')">
-            <span>Photoshop Completo</span>
-        </div>
-        <div class="card" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee')">
-            <span>Illustrator Pro</span>
-        </div>
+    <div class="categoria">
+        <h2>Art Digital & Design</h2>
     </div>
-</div>
 
-<!-- ARTES MARCIAIS -->
-<div class="categoria">
-    <h2>Artes Marciais</h2>
-    <div class="linha">
-        <div class="card" style="background-image:url('https://images.unsplash.com/photo-1555597673-b21d5c935865')">
-            <span>Muay Thai</span>
-        </div>
-        <div class="card" style="background-image:url('https://images.unsplash.com/photo-1599058917765-a780eda07a3e')">
-            <span>Jiu Jitsu</span>
-        </div>
+    <div class="categoria">
+        <h2>Artes Marciais</h2>
     </div>
-</div>
 
-<!-- FINANCEIRO -->
-<div class="categoria">
-    <h2>Financeiro</h2>
-    <div class="linha">
-        <div class="card" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f')">
-            <span>Investimentos</span>
-        </div>
-        <div class="card" style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85')">
-            <span>Renda Extra</span>
-        </div>
+    <div class="categoria">
+        <h2>Financeiro</h2>
     </div>
-</div>
 
-<!-- CULINARIA -->
-<div class="categoria">
-    <h2>Culinária</h2>
-    <div class="linha">
-        <div class="card" style="background-image:url('https://images.unsplash.com/photo-1498837167922-ddd27525d352')">
-            <span>Confeitaria</span>
-        </div>
-        <div class="card" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836')">
-            <span>Massas Artesanais</span>
-        </div>
+    <div class="categoria">
+        <h2>Culinária</h2>
     </div>
-</div>
 
-<!-- RELIGIÃO -->
-<div class="categoria">
-    <h2>Religião</h2>
-    <div class="linha">
-        <div class="card" style="background-image:url('https://images.unsplash.com/photo-1507842217343-583bb7270b66')">
-            <span>Estudos Espirituais</span>
-        </div>
+    <div class="categoria">
+        <h2>Religião</h2>
     </div>
+
+    <div class="categoria">
+        <h2>Marketing Digital</h2>
+    </div>
+
+    <div class="categoria">
+        <h2>Programação</h2>
+    </div>
+
+    <div class="categoria">
+        <h2>Idiomas</h2>
+    </div>
+
 </div>
 
 </body>
