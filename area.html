@@ -2,157 +2,165 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Área do Aluno</title>
 
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0f172a, #020617);
+    font-family: 'Arial', sans-serif;
+    background: #0b0f1a;
     color: white;
 }
 
-h1 {
-    text-align: center;
-    margin-top: 40px;
+header {
+    background: #000;
+    padding: 20px 50px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #22d3ee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.container {
+    padding: 30px 50px;
+}
+
+h2 {
+    margin-bottom: 15px;
     color: #22d3ee;
 }
 
-.categoria {
-    margin: 50px;
-}
-
-.categoria h2 {
-    border-left: 5px solid #22d3ee;
-    padding-left: 15px;
-    margin-bottom: 25px;
-    color: #22d3ee;
+.linha {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 20px;
 }
 
 .card {
-    background: #111c3a;
-    padding: 25px;
+    min-width: 250px;
+    height: 150px;
+    background: linear-gradient(135deg, #111c3a, #1e293b);
     border-radius: 12px;
-    width: 300px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.4s;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
-.btn {
-    display: inline-block;
-    padding: 12px 25px;
+.card:hover {
+    transform: scale(1.1);
+    background: #22d3ee;
+    color: black;
+}
+
+.card a {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sair {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.sair a {
+    padding: 12px 30px;
     background: #22d3ee;
     color: black;
     text-decoration: none;
     border-radius: 8px;
     font-weight: bold;
-    transition: 0.3s;
 }
 
-.btn:hover {
-    background: #0ea5e9;
+::-webkit-scrollbar {
+    height: 8px;
 }
 
-.sair {
-    text-align: center;
-    margin: 60px;
+::-webkit-scrollbar-thumb {
+    background: #22d3ee;
+    border-radius: 10px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Área do Aluno</h1>
+<header>🔥 Plataforma de Cursos</header>
 
-<!-- 1 -->
-<div class="categoria">
+<div class="container">
+
 <h2>🎨 ARTDIGITAL - DESIGN</h2>
-<div class="card">
-<a class="btn" href="https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA" target="_blank">Entrar na Categoria</a>
-</div>
+<div class="linha">
+<div class="card"><a href="https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA" target="_blank">Entrar</a></div>
 </div>
 
-<!-- 2 -->
-<div class="categoria">
 <h2>🥋 ARTES MARCIAIS</h2>
-<div class="card">
-<a class="btn" href="https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC" target="_blank">Entrar na Categoria</a>
-</div>
+<div class="linha">
+<div class="card"><a href="https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC" target="_blank">Entrar</a></div>
 </div>
 
-<!-- 3 -->
-<div class="categoria">
 <h2>💰 FINANCEIRO</h2>
-<div class="card">
-<a class="btn" href="https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu" target="_blank">Entrar na Categoria</a>
-</div>
+<div class="linha">
+<div class="card"><a href="https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu" target="_blank">Entrar</a></div>
 </div>
 
-<!-- 4 -->
-<div class="categoria">
 <h2>🍳 CULINÁRIA</h2>
-<div class="card">
-<a class="btn" href="https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r" target="_blank">Entrar na Categoria</a>
-</div>
+<div class="linha">
+<div class="card"><a href="https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r" target="_blank">Entrar</a></div>
 </div>
 
-<!-- 5 -->
-<div class="categoria">
 <h2>📚 ESTUDOS</h2>
-<div class="card">
-<a class="btn" href="https://drive.google.com/drive/folders/1rDBhTTxD3pc5kp-ljWQ5zzBldzbdYC81" target="_blank">Entrar na Categoria</a>
-</div>
+<div class="linha">
+<div class="card"><a href="https://drive.google.com/drive/folders/1rDBhTTxD3pc5kp-ljWQ5zzBldzbdYC81" target="_blank">Entrar</a></div>
 </div>
 
-<!-- 6 -->
-<div class="categoria">
 <h2>🤖 IA</h2>
-<div class="card">
-<a class="btn" href="https://drive.google.com/drive/folders/12DbWmPDFcgs_mM_R6cCSrxrHejiBIMOG" target="_blank">Entrar na Categoria</a>
-</div>
+<div class="linha">
+<div class="card"><a href="https://drive.google.com/drive/folders/12DbWmPDFcgs_mM_R6cCSrxrHejiBIMOG" target="_blank">Entrar</a></div>
 </div>
 
-<!-- 7 -->
-<div class="categoria">
 <h2>🏥 SAÚDE</h2>
-<div class="card">
-<a class="btn" href="https://drive.google.com/drive/folders/1ywrWcyyZHdmpDkUXz4_OdfnU5o8sPk1E" target="_blank">Entrar na Categoria</a>
-</div>
+<div class="linha">
+<div class="card"><a href="https://drive.google.com/drive/folders/1ywrWcyyZHdmpDkUXz4_OdfnU5o8sPk1E" target="_blank">Entrar</a></div>
 </div>
 
-<!-- 8 -->
-<div class="categoria">
 <h2>📈 MARKETING DIGITAL - TRÁFEGO PAGO</h2>
-<div class="card">
-<a class="btn" href="https://drive.google.com/drive/folders/1cGdn-RRV0rMbU_RLtFbA3MBiw1hphFGW" target="_blank">Entrar na Categoria</a>
-</div>
+<div class="linha">
+<div class="card"><a href="https://drive.google.com/drive/folders/1cGdn-RRV0rMbU_RLtFbA3MBiw1hphFGW" target="_blank">Entrar</a></div>
 </div>
 
-<!-- 9 -->
-<div class="categoria">
 <h2>✝ RELIGIÃO</h2>
-<div class="card">
-<a class="btn" href="https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r" target="_blank">Entrar na Categoria</a>
-</div>
+<div class="linha">
+<div class="card"><a href="https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r" target="_blank">Entrar</a></div>
 </div>
 
-<!-- 10 -->
-<div class="categoria">
 <h2>⚡ TESLA TREINAMENTOS</h2>
-<div class="card">
-<a class="btn" href="https://drive.google.com/drive/folders/1xsdJ-26VD-guYSj7Kq_ITJVXcwlxKfAD" target="_blank">Entrar na Categoria</a>
-</div>
+<div class="linha">
+<div class="card"><a href="https://drive.google.com/drive/folders/1xsdJ-26VD-guYSj7Kq_ITJVXcwlxKfAD" target="_blank">Entrar</a></div>
 </div>
 
-<!-- 11 -->
-<div class="categoria">
 <h2>📦 DIVERSOS</h2>
-<div class="card">
-<a class="btn" href="https://drive.google.com/drive/folders/123z-XyT10UInmh1tbz3IiD0Aap3Q2QMg" target="_blank">Entrar na Categoria</a>
-</div>
+<div class="linha">
+<div class="card"><a href="https://drive.google.com/drive/folders/123z-XyT10UInmh1tbz3IiD0Aap3Q2QMg" target="_blank">Entrar</a></div>
 </div>
 
 <div class="sair">
-<a class="btn" href="login.html">Sair</a>
+<a href="login.html">Sair</a>
+</div>
+
 </div>
 
 </body>
