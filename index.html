@@ -1,269 +1,117 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextMind Premium</title>
+  <meta charset="UTF-8">
+  <title>NextMind - Área do Aluno</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0f1a;
+      color: #ffffff;
+      text-align: center;
+      padding: 40px;
+    }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
-}
+    .box {
+      max-width: 500px;
+      margin: auto;
+      background: #11162a;
+      padding: 30px;
+      border-radius: 10px;
+    }
 
-body{
-overflow:hidden;
-background:#000;
-color:white;
-}
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: none;
+    }
 
-/* FUNDO 3D */
-#bg{
-position:fixed;
-top:0;
-left:0;
-z-index:-2;
-}
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 20px;
+      background: #00e5ff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
 
-/* TELA INICIAL */
-.home{
-position:absolute;
-width:100%;
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-background:rgba(0,0,0,0.7);
-backdrop-filter:blur(12px);
-transition:1s;
-z-index:5;
-}
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 15px 20px;
+      background: #00e5ff;
+      color: #000;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
 
-.home h1{
-font-size:48px;
-margin-bottom:50px;
-letter-spacing:4px;
-text-shadow:0 0 30px cyan;
-}
-
-.btn{
-padding:18px 50px;
-margin:15px;
-border:none;
-border-radius:40px;
-font-size:18px;
-cursor:pointer;
-background:linear-gradient(45deg,cyan,blue);
-color:white;
-transition:.3s;
-}
-
-.btn:hover{
-transform:scale(1.1);
-box-shadow:0 0 25px cyan;
-}
-
-/* PLATAFORMA */
-.platform{
-position:absolute;
-width:100%;
-height:100vh;
-display:none;
-padding:70px 6%;
-overflow:auto;
-background:rgba(0,0,0,0.5);
-backdrop-filter:blur(6px);
-}
-
-.topo{
-font-size:26px;
-margin-bottom:40px;
-text-shadow:0 0 20px cyan;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:35px;
-}
-
-.card{
-height:200px;
-border-radius:20px;
-overflow:hidden;
-cursor:pointer;
-position:relative;
-transition:.5s;
-transform-style:preserve-3d;
-box-shadow:0 25px 60px rgba(0,0,0,.7);
-}
-
-.card img{
-width:100%;
-height:100%;
-object-fit:cover;
-filter:brightness(60%);
-transition:.5s;
-}
-
-.card h2{
-position:absolute;
-bottom:20px;
-left:20px;
-z-index:2;
-font-size:16px;
-text-shadow:0 0 15px cyan;
-}
-
-.card:hover{
-transform:rotateY(15deg) rotateX(10deg) scale(1.1);
-}
-
-.card:hover img{
-filter:brightness(100%);
-}
-</style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
 
-<canvas id="bg"></canvas>
+  <!-- LOGIN -->
+  <div class="box" id="loginBox">
+    <h2>Login do Aluno</h2>
 
-<!-- TELA INICIAL -->
-<div class="home" id="home">
-<h1>NEXTMIND</h1>
-<button class="btn" onclick="assinar()">Quero Assinar</button>
-<button class="btn" onclick="entrar()">Já Sou Aluno</button>
-</div>
+    <input type="text" id="whats" placeholder="Seu WhatsApp">
+    <button onclick="login()">Entrar</button>
+  </div>
 
-<!-- PLATAFORMA -->
-<div class="platform" id="platform">
+  <!-- ÁREA DO ALUNO -->
+  <div class="box hidden" id="areaAluno">
+    <h2>Bem-vindo ao NextMind</h2>
+    <p>Acesso liberado aos cursos</p>
 
-<div class="topo">Biblioteca Premium</div>
+    <a href="https://drive.google.com/drive/folders/12dVt6qKUWJti_4Q4MWQIs8GTE-u_fIn9?usp=sharing"
+       target="_blank"
+       class="btn">
+       Acessar todos os cursos
+    </a>
+  </div>
 
-<div class="grid">
+  <script>
+    async function login() {
+      var whats = document.getElementById("whats").value;
 
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1u2LcQa5Fo63G0xWNt6ZMvcF_RX_aiosA')">
-<img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262">
-<h2>Art Digital & Design</h2>
-</div>
+      if (whats.trim() === "") {
+        alert("Digite seu WhatsApp");
+        return;
+      }
 
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1K7MbrQZSTO7vhjI2dwVw7J0nij6beafC')">
-<img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed">
-<h2>Artes Marciais</h2>
-</div>
+      try {
+        const resposta = await fetch(
+          "https://script.google.com/macros/s/AKfycby4nEQjdmfFuv3UnSQZ3zkiY1MhB4U7hkFMGvW45LwvmIewz7cdVs9lpKCIHqeYLoV3/exec?whats=" + whats
+        );
 
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1zJZZFYqeRBkTRTbiUV1wgApX6l-KWyAu')">
-<img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f">
-<h2>Financeiro</h2>
-</div>
+        const status = await resposta.text();
 
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1Wh8LD24-B8iiJvmkyy_nnVn_6gt04f7r')">
-<img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352">
-<h2>Culinária</h2>
-</div>
+        if (status.trim() === "ATIVO") {
+          document.getElementById("loginBox").classList.add("hidden");
+          document.getElementById("areaAluno").classList.remove("hidden");
+        } 
+        else if (status.trim() === "VENCIDO") {
+          alert("Seu acesso está vencido. Renove sua assinatura.");
+        } 
+        else {
+          alert("WhatsApp não encontrado.");
+        }
 
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1rDBhTTxD3pc5kp-ljWQ5zzBldzbdYC81')">
-<img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644">
-<h2>Estudos</h2>
-</div>
-
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/12DbWmPDFcgs_mM_R6cCSrxrHejiBIMOG')">
-<img src="https://images.unsplash.com/photo-1677442136019-21780ecad995">
-<h2>Inteligência Artificial</h2>
-</div>
-
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1ywrWcyyZHdmpDkUXz4_OdfnU5o8sPk1E')">
-<img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5">
-<h2>Saúde</h2>
-</div>
-
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1cGdn-RRV0rMbU_RLtFbA3MBiw1hphFGW')">
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f">
-<h2>Marketing Digital</h2>
-</div>
-
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1_wwc2pMPdFC9lEPa3x1845C1XXaWGg-r')">
-<img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65">
-<h2>Religião & Espiritualidade</h2>
-</div>
-
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/1xsdJ-26VD-guYSj7Kq_ITJVXcwlxKfAD')">
-<img src="https://images.unsplash.com/photo-1518770660439-4636190af475">
-<h2>Tesla Treinamentos</h2>
-</div>
-
-<div class="card" onclick="abrir('https://drive.google.com/drive/folders/123z-XyT10UInmh1tbz3IiD0Aap3Q2QMg')">
-<img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d">
-<h2>Diversos</h2>
-</div>
-
-</div>
-</div>
-
-<script>
-function assinar(){
-alert("Aqui você pode colocar sua página de pagamento ou link do Pix.");
-}
-
-function entrar(){
-document.getElementById("home").style.opacity="0";
-setTimeout(()=>{
-document.getElementById("home").style.display="none";
-document.getElementById("platform").style.display="block";
-},800);
-}
-
-function abrir(link){
-window.open(link,'_blank');
-}
-
-/* FUNDO 3D */
-const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
-const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('bg'),alpha:true});
-renderer.setSize(window.innerWidth,window.innerHeight);
-
-camera.position.z=5;
-
-const geometry=new THREE.BoxGeometry();
-const material=new THREE.MeshStandardMaterial({color:0x00ffff,wireframe:true});
-const cubes=[];
-
-for(let i=0;i<60;i++){
-const cube=new THREE.Mesh(geometry,material);
-cube.position.x=(Math.random()-0.5)*25;
-cube.position.y=(Math.random()-0.5)*25;
-cube.position.z=(Math.random()-0.5)*25;
-scene.add(cube);
-cubes.push(cube);
-}
-
-const light=new THREE.PointLight(0x00ffff,2);
-light.position.set(10,10,10);
-scene.add(light);
-
-function animate(){
-requestAnimationFrame(animate);
-cubes.forEach(c=>{
-c.rotation.x+=0.01;
-c.rotation.y+=0.01;
-});
-renderer.render(scene,camera);
-}
-animate();
-
-window.addEventListener('resize',()=>{
-renderer.setSize(window.innerWidth,window.innerHeight);
-camera.aspect=window.innerWidth/window.innerHeight;
-camera.updateProjectionMatrix();
-});
-</script>
+      } catch (erro) {
+        alert("Erro ao verificar acesso.");
+        console.error(erro);
+      }
+    }
+  </script>
 
 </body>
 </html>
