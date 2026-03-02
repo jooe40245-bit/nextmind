@@ -2,18 +2,32 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>NextMind - Área do Aluno</title>
+<title>Área do Aluno</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <style>
 body{
 margin:0;
+overflow:hidden;
 font-family:'Segoe UI',sans-serif;
-background:linear-gradient(135deg,#021024,#03254c);
+background:black;
 color:white;
+}
+
+#bg{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+.container{
+position:absolute;
+width:100%;
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
 }
 
 .box{
@@ -22,7 +36,7 @@ padding:40px;
 border-radius:20px;
 width:400px;
 text-align:center;
-box-shadow:0 0 30px rgba(0,255,255,0.4);
+box-shadow:0 0 30px cyan;
 }
 
 input{
@@ -42,21 +56,16 @@ border-radius:8px;
 background:cyan;
 font-weight:bold;
 cursor:pointer;
-transition:0.3s;
 }
-
-button:hover{
-transform:scale(1.05);
-box-shadow:0 0 20px cyan;
-}
-
-.hidden{
-display:none;
-}
+.hidden{display:none;}
 </style>
 </head>
 
 <body>
+
+<canvas id="bg"></canvas>
+
+<div class="container">
 
 <div class="box" id="loginBox">
 <h2>Área do Aluno</h2>
@@ -65,48 +74,53 @@ display:none;
 </div>
 
 <div class="box hidden" id="areaAluno">
-<h2>Bem-vindo ao NextMind</h2>
-<p>Acesso liberado</p>
-
+<h2>Bem-vindo</h2>
 <a href="https://drive.google.com/drive/folders/12dVt6qKUWJti_4Q4MWQIs8GTE-u_fIn9?usp=sharing" target="_blank">
-<button>Acessar todos os cursos</button>
+<button>Acessar Cursos</button>
 </a>
+</div>
+
 </div>
 
 <script>
 async function login(){
+var whats=document.getElementById("whats").value;
+if(whats.trim()==""){alert("Digite seu WhatsApp");return;}
 
-var whats = document.getElementById("whats").value;
+const resposta=await fetch("https://script.google.com/macros/s/AKfycby4nEQjdmfFuv3UnSQZ3zkiY1MhB4U7hkFMGvW45LwvmIewz7cdVs9lpKCIHqeYLoV3/exec?whats="+whats);
+const status=await resposta.text();
 
-if(whats.trim() === ""){
-alert("Digite seu WhatsApp");
-return;
-}
-
-try{
-
-const resposta = await fetch(
-"https://script.google.com/macros/s/AKfycby4nEQjdmfFuv3UnSQZ3zkiY1MhB4U7hkFMGvW45LwvmIewz7cdVs9lpKCIHqeYLoV3/exec?whats=" + whats
-);
-
-const status = await resposta.text();
-
-if(status.trim() === "ATIVO"){
+if(status.trim()=="ATIVO"){
 document.getElementById("loginBox").classList.add("hidden");
 document.getElementById("areaAluno").classList.remove("hidden");
 }
-else if(status.trim() === "VENCIDO"){
-alert("Seu acesso está vencido.");
+else if(status.trim()=="VENCIDO"){
+alert("Plano vencido.");
 }
 else{
 alert("WhatsApp não encontrado.");
 }
-
-}catch(e){
-alert("Erro ao verificar acesso.");
 }
 
+/* FUNDO 3D */
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('bg'),alpha:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
+camera.position.z=5;
+
+const geometry=new THREE.TorusGeometry(2,0.5,16,100);
+const material=new THREE.MeshBasicMaterial({color:0x00ffff,wireframe:true});
+const torus=new THREE.Mesh(geometry,material);
+scene.add(torus);
+
+function animate(){
+requestAnimationFrame(animate);
+torus.rotation.x+=0.01;
+torus.rotation.y+=0.01;
+renderer.render(scene,camera);
 }
+animate();
 </script>
 
 </body>
