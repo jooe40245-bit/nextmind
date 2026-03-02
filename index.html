@@ -1,73 +1,122 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>NextMind - Cursos</title>
+<meta charset="UTF-8">
+<title>NextMind Premium</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0b0f1a;
-      color: #ffffff;
-      text-align: center;
-      padding: 40px;
-    }
+<style>
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#021024,#03254c,#054a91);
+background-size:400% 400%;
+animation:fundo 10s ease infinite;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
 
-    .box {
-      max-width: 520px;
-      margin: auto;
-      background: #11162a;
-      padding: 30px;
-      border-radius: 10px;
-    }
+@keyframes fundo{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
 
-    .btn {
-      display: block;
-      margin-top: 20px;
-      padding: 15px;
-      background: #00e5ff;
-      color: #000;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-    }
+.box{
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+padding:40px;
+border-radius:20px;
+width:420px;
+text-align:center;
+box-shadow:0 0 40px rgba(0,255,255,0.4);
+}
 
-    .pix {
-      margin-top: 15px;
-      background: #0d1325;
-      padding: 15px;
-      border-radius: 6px;
-      font-size: 14px;
-      word-break: break-all;
-    }
-  </style>
+h2{
+margin-bottom:10px;
+font-size:28px;
+}
+
+.planos{
+margin-top:20px;
+}
+
+.plano{
+background:#0d1325;
+padding:15px;
+margin-top:10px;
+border-radius:10px;
+}
+
+.pix{
+margin-top:20px;
+background:#0d1325;
+padding:15px;
+border-radius:10px;
+word-break:break-all;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:15px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+background:cyan;
+color:black;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px cyan;
+}
+
+a{
+text-decoration:none;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="box">
-    <h2>📚 NextMind Cursos</h2>
-    <p>Acesso completo a todos os cursos do Drive</p>
+<div class="box">
+<h2>🚀 NextMind Premium</h2>
+<p>Acesso completo a todos os cursos</p>
 
-    <h3>💳 Planos</h3>
-    <p>Mensal: <strong>R$ 14,99</strong></p>
-    <p>Anual: <strong>R$ 129,90</strong></p>
+<div class="planos">
+<div class="plano">Mensal: <strong>R$ 15,00</strong></div>
+<div class="plano">Anual: <strong>R$ 120,00</strong></div>
+</div>
 
-    <h3>🔑 PIX</h3>
-    <div class="pix">
-      kbmm40245@gmail.com
-    </div>
+<h3>🔑 PIX</h3>
+<div class="pix" id="pixKey">
+kbmm40245@gmail.com
+</div>
 
-    <a class="btn"
-       href="https://wa.me/5513988238928?text=Olá!%20Já%20realizei%20o%20pagamento.%0A%0A📌%20Plano:%0A📌%20WhatsApp:%0A📌%20Gmail:%0A📎%20Segue%20o%20comprovante:"
-       target="_blank">
-      Enviar comprovante no WhatsApp
-    </a>
+<button onclick="copiarPix()">Copiar chave PIX</button>
 
-    <a class="btn" href="login.html">
-      Já sou aluno
-    </a>
-  </div>
+<a href="https://wa.me/5513988238928?text=Olá!%20Já%20realizei%20o%20pagamento.%0A%0A📌%20Plano:%0A📌%20WhatsApp:%0A📌%20Gmail:%0A📎%20Segue%20o%20comprovante:" target="_blank">
+<button>Enviar comprovante no WhatsApp</button>
+</a>
+
+<a href="login.html">
+<button>Já sou aluno</button>
+</a>
+
+</div>
+
+<script>
+function copiarPix(){
+var chave = document.getElementById("pixKey").innerText;
+navigator.clipboard.writeText(chave);
+alert("Chave PIX copiada!");
+}
+</script>
 
 </body>
 </html>
