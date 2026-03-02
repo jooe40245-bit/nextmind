@@ -3,80 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <title>Pagamento - NextMind</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
-      background:#0b0f1a;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height:100vh;
-      font-family:Arial;
-      color:#fff;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
+
     .box {
-      background:#12172a;
-      padding:40px;
-      border-radius:12px;
-      width:400px;
-      text-align:center;
+      background: #0b1c26;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 0 25px rgba(0,0,0,0.6);
     }
-    input, select, button {
-      width:100%;
-      padding:14px;
-      margin-top:12px;
-      border-radius:8px;
-      border:none;
-      font-size:15px;
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
     }
-    button {
-      background:#00e5ff;
-      cursor:pointer;
+
+    p {
+      text-align: center;
+      color: #ccc;
+    }
+
+    .plan {
+      border: 1px solid #1f4f5f;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    .plan h2 {
+      margin: 0;
+      color: #00e6e6;
+    }
+
+    .price {
+      font-size: 22px;
+      margin: 10px 0;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      background: #00b3b3;
+      color: #000;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #00ffff;
+    }
+
+    .alert {
+      margin-top: 20px;
+      font-size: 14px;
+      background: #08202a;
+      padding: 12px;
+      border-radius: 8px;
+      color: #ffdd99;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 20px;
     }
   </style>
 </head>
+
 <body>
 
-<div class="box">
-  <h2>Escolha seu plano</h2>
+  <div class="box">
+    <h1>Acesso aos Cursos</h1>
+    <p>Escolha seu plano e conclua o pagamento via PIX</p>
 
-  <button onclick="window.open('https://mpago.la/1inhqw2','_blank')">Pagar Plano Mensal</button>
-  <button onclick="window.open('https://mpago.la/1mAYCxp','_blank')">Pagar Plano Anual</button>
+    <!-- PLANO MENSAL -->
+    <div class="plan">
+      <h2>Plano Mensal</h2>
+      <div class="price">R$ 14,99 / mês</div>
+      <p>Acesso completo ao Drive de cursos</p>
 
-  <hr style="margin:25px 0">
+      <p><strong>PIX:</strong><br>
+      SUA_CHAVE_PIX_AQUI</p>
 
-  <h3>Após pagar, confirme seus dados</h3>
+      <a class="btn"
+         href="https://wa.me/55SEUNUMEROAQUI?text=Olá!%20Já%20realizei%20o%20pagamento%20do%20PLANO%20MENSAL%20(R$%2014,99).%0A%0A📎%20Comprovante%20PIX:%0A(anexar%20aqui)%0A%0A📱%20WhatsApp%20(com%20DDD):%0A%0A📧%20Gmail%20para%20acesso%20ao%20Drive:">
+        Enviar comprovante no WhatsApp
+      </a>
+    </div>
 
-  <input id="whatsapp" placeholder="WhatsApp">
-  <input id="email" placeholder="Gmail">
+    <!-- PLANO ANUAL -->
+    <div class="plan">
+      <h2>Plano Anual</h2>
+      <div class="price">R$ 129,90 / ano</div>
+      <p>Economize e tenha acesso por 12 meses</p>
 
-  <select id="plano">
-    <option value="mensal">Plano Mensal</option>
-    <option value="anual">Plano Anual</option>
-  </select>
+      <p><strong>PIX:</strong><br>
+      SUA_CHAVE_PIX_AQUI</p>
 
-  <button onclick="confirmar()">Confirmar Pagamento</button>
-</div>
+      <a class="btn"
+         href="https://wa.me/55SEUNUMEROAQUI?text=Olá!%20Já%20realizei%20o%20pagamento%20do%20PLANO%20ANUAL%20(R$%20129,90).%0A%0A📎%20Comprovante%20PIX:%0A(anexar%20aqui)%0A%0A📱%20WhatsApp%20(com%20DDD):%0A%0A📧%20Gmail%20para%20acesso%20ao%20Drive:">
+        Enviar comprovante no WhatsApp
+      </a>
+    </div>
 
-<script>
-function confirmar() {
-  const whatsapp = document.getElementById("whatsapp").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const plano = document.getElementById("plano").value;
+    <div class="alert">
+      ⚠️ Importante:  
+      Preencha corretamente seu WhatsApp e Gmail para evitar atraso na liberação do acesso.
+    </div>
 
-  if (!whatsapp || !email) {
-    alert("Preencha todos os campos");
-    return;
-  }
-
-  fetch("https://script.google.com/macros/s/AKfycby4nEQjdmfFuv3UnSQZ3zkiY1MhB4U7hkFMGvW45LwvmIewz7cdVs9lpKCIHqeYLoV3/exec", {
-    method: "POST",
-    body: JSON.stringify({ whatsapp, email, plano })
-  }).then(() => {
-    alert("Pagamento confirmado! Acesso liberado.");
-    window.location.href = "login.html";
-  });
-}
-</script>
+    <footer>
+      © NextMind - Todos os direitos reservados
+    </footer>
+  </div>
 
 </body>
 </html>
