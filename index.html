@@ -2,13 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>NextMind - Área do Aluno</title>
+  <title>NextMind - Acesso aos Cursos</title>
 
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #0b0f1a;
-      color: #ffffff;
+      color: #fff;
       text-align: center;
       padding: 40px;
     }
@@ -21,29 +21,10 @@
       border-radius: 10px;
     }
 
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border-radius: 5px;
-      border: none;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 20px;
-      background: #00e5ff;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
     .btn {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 15px 20px;
+      display: block;
+      margin-top: 20px;
+      padding: 15px;
       background: #00e5ff;
       color: #000;
       text-decoration: none;
@@ -51,67 +32,42 @@
       font-weight: bold;
     }
 
-    .hidden {
-      display: none;
+    .pix {
+      margin-top: 20px;
+      background: #0d1325;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 14px;
+      word-break: break-all;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- LOGIN -->
-  <div class="box" id="loginBox">
-    <h2>Login do Aluno</h2>
+  <div class="box">
+    <h2>📚 NextMind Cursos</h2>
+    <p>Acesso completo a todos os cursos do Drive</p>
 
-    <input type="text" id="whats" placeholder="Seu WhatsApp">
-    <button onclick="login()">Entrar</button>
-  </div>
+    <h3>💳 Planos</h3>
+    <p>Mensal: <strong>R$ 14,99</strong></p>
+    <p>Anual: <strong>R$ 129,90</strong></p>
 
-  <!-- ÁREA DO ALUNO -->
-  <div class="box hidden" id="areaAluno">
-    <h2>Bem-vindo ao NextMind</h2>
-    <p>Acesso liberado aos cursos</p>
+    <h3>🔑 PIX</h3>
+    <div class="pix">
+      SUA_CHAVE_PIX_AQUI
+    </div>
 
-    <a href="https://drive.google.com/drive/folders/12dVt6qKUWJti_4Q4MWQIs8GTE-u_fIn9?usp=sharing"
-       target="_blank"
-       class="btn">
-       Acessar todos os cursos
+    <a class="btn"
+       href="https://wa.me/55SEUNUMEROAQUI?text=Olá!%20Já%20fiz%20o%20pagamento.%0A%0A📌%20Plano:%0A📌%20Meu%20Whats:%0A📌%20Meu%20Gmail:%0A📎%20Segue%20o%20comprovante:"
+       target="_blank">
+      Enviar comprovante no WhatsApp
+    </a>
+
+    <a class="btn" href="login.html">
+      Já sou aluno
     </a>
   </div>
-
-  <script>
-    async function login() {
-      var whats = document.getElementById("whats").value;
-
-      if (whats.trim() === "") {
-        alert("Digite seu WhatsApp");
-        return;
-      }
-
-      try {
-        const resposta = await fetch(
-          "https://script.google.com/macros/s/AKfycby4nEQjdmfFuv3UnSQZ3zkiY1MhB4U7hkFMGvW45LwvmIewz7cdVs9lpKCIHqeYLoV3/exec?whats=" + whats
-        );
-
-        const status = await resposta.text();
-
-        if (status.trim() === "ATIVO") {
-          document.getElementById("loginBox").classList.add("hidden");
-          document.getElementById("areaAluno").classList.remove("hidden");
-        } 
-        else if (status.trim() === "VENCIDO") {
-          alert("Seu acesso está vencido. Renove sua assinatura.");
-        } 
-        else {
-          alert("WhatsApp não encontrado.");
-        }
-
-      } catch (erro) {
-        alert("Erro ao verificar acesso.");
-        console.error(erro);
-      }
-    }
-  </script>
 
 </body>
 </html>
