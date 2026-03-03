@@ -1,126 +1,150 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Área do Aluno</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NextMind - Área do Aluno</title>
 
 <style>
-body{
+*{
 margin:0;
-overflow:hidden;
-font-family:'Segoe UI',sans-serif;
-background:black;
-color:white;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
 }
 
-#bg{
-position:fixed;
-top:0;
-left:0;
-z-index:-1;
+body{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#001a33,#003366,#001a33);
+background-size:400% 400%;
+animation:fundo 15s ease infinite;
+color:white;
+overflow:hidden;
+}
+
+@keyframes fundo{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
 }
 
 .container{
-position:absolute;
-width:100%;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-.box{
-background:rgba(0,0,0,0.7);
+background:#000000dd;
 padding:40px;
 border-radius:20px;
-width:400px;
+width:350px;
 text-align:center;
-box-shadow:0 0 30px cyan;
+box-shadow:0 0 40px #00ffff33;
+}
+
+h1{
+margin-bottom:25px;
 }
 
 input{
 width:100%;
-padding:12px;
-margin-top:15px;
+padding:15px;
 border:none;
-border-radius:8px;
+border-radius:10px;
+margin-bottom:20px;
+font-size:16px;
 }
 
 button{
 width:100%;
-padding:14px;
-margin-top:20px;
+padding:15px;
 border:none;
-border-radius:8px;
-background:cyan;
+border-radius:10px;
+background:#008080;
+color:white;
 font-weight:bold;
 cursor:pointer;
+transition:0.3s;
 }
-.hidden{display:none;}
+
+button:hover{
+background:#00aaaa;
+}
+
+.mensagem{
+margin-top:15px;
+font-weight:bold;
+}
+
+.vencido{
+color:#ff4d4d;
+}
+
+.ativo{
+color:#00ff99;
+}
 </style>
 </head>
-
 <body>
 
-<canvas id="bg"></canvas>
-
 <div class="container">
+<h1>Área do Aluno</h1>
 
-<div class="box" id="loginBox">
-<h2>Área do Aluno</h2>
-<input type="text" id="whats" placeholder="Digite seu WhatsApp">
-<button onclick="login()">Entrar</button>
-</div>
+<input type="text" id="whatsapp" placeholder="Digite seu WhatsApp">
 
-<div class="box hidden" id="areaAluno">
-<h2>Bem-vindo</h2>
-<a href="https://drive.google.com/drive/folders/12dVt6qKUWJti_4Q4MWQIs8GTE-u_fIn9?usp=sharing" target="_blank">
-<button>Acessar Cursos</button>
-</a>
-</div>
+<button onclick="verificar()">Entrar</button>
+
+<div id="mensagem" class="mensagem"></div>
 
 </div>
 
 <script>
-async function login(){
-var whats=document.getElementById("whats").value;
-if(whats.trim()==""){alert("Digite seu WhatsApp");return;}
 
-const resposta=await fetch("https://script.google.com/macros/s/AKfycby4nEQjdmfFuv3UnSQZ3zkiY1MhB4U7hkFMGvW45LwvmIewz7cdVs9lpKCIHqeYLoV3/exec?whats="+whats);
-const status=await resposta.text();
+// ===== LISTA MANUAL DE ALUNOS =====
+// Você vai editar aqui manualmente
 
-if(status.trim()=="ATIVO"){
-document.getElementById("loginBox").classList.add("hidden");
-document.getElementById("areaAluno").classList.remove("hidden");
+const alunos = [
+{
+whats: "13991442800",
+vencimento: "2026-03-30"
+},
+{
+whats: "11999999999",
+vencimento: "2025-01-10"
 }
-else if(status.trim()=="VENCIDO"){
-alert("Plano vencido.");
-}
-else{
-alert("WhatsApp não encontrado.");
-}
+];
+
+function verificar(){
+
+let numero = document.getElementById("whatsapp").value.replace(/\D/g,'');
+let hoje = new Date();
+let msg = document.getElementById("mensagem");
+
+let aluno = alunos.find(a => a.whats === numero);
+
+if(!aluno){
+msg.innerHTML = "❌ Você ainda não possui assinatura.";
+msg.className = "mensagem vencido";
+return;
 }
 
-/* FUNDO 3D */
-const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
-const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('bg'),alpha:true});
-renderer.setSize(window.innerWidth,window.innerHeight);
-camera.position.z=5;
+let dataVenc = new Date(aluno.vencimento);
 
-const geometry=new THREE.TorusGeometry(2,0.5,16,100);
-const material=new THREE.MeshBasicMaterial({color:0x00ffff,wireframe:true});
-const torus=new THREE.Mesh(geometry,material);
-scene.add(torus);
-
-function animate(){
-requestAnimationFrame(animate);
-torus.rotation.x+=0.01;
-torus.rotation.y+=0.01;
-renderer.render(scene,camera);
+if(dataVenc < hoje){
+msg.innerHTML = "❌ Sua assinatura venceu.";
+msg.className = "mensagem vencido";
+return;
 }
-animate();
+
+// SE ESTIVER ATIVO
+msg.innerHTML = "✅ Acesso liberado!";
+msg.className = "mensagem ativo";
+
+// redireciona após 1 segundo
+setTimeout(()=>{
+window.location.href = "index.html";
+},1000);
+
+}
+
 </script>
 
 </body>
