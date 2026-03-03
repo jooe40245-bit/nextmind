@@ -1,108 +1,17 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextMind - Área do Aluno</title>
-
-<style>
-body{
-margin:0;
-font-family:Arial, sans-serif;
-background:linear-gradient(135deg,#001a33,#003366,#000814);
-background-size:400% 400%;
-animation:fundo 12s ease infinite;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
-
-@keyframes fundo{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
-
-.box{
-background:#000000dd;
-padding:40px;
-border-radius:20px;
-width:380px;
-text-align:center;
-box-shadow:0 0 40px #00ffff33;
-}
-
-input{
-width:100%;
-padding:15px;
-border:none;
-border-radius:10px;
-margin-bottom:20px;
-font-size:16px;
-}
-
-button{
-width:100%;
-padding:15px;
-border:none;
-border-radius:10px;
-background:#00e5ff;
-color:#000;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
-}
-
-button:hover{
-background:#00bcd4;
-}
-
-.btn{
-display:block;
-margin-top:20px;
-padding:15px;
-background:#00e5ff;
-color:#000;
-text-decoration:none;
-border-radius:10px;
-font-weight:bold;
-}
-
-.hidden{
-display:none;
-}
-</style>
-</head>
-
-<body>
-
-<!-- LOGIN -->
-<div class="box" id="loginBox">
-<h2>Login do Aluno</h2>
-<input type="text" id="whats" placeholder="Digite seu WhatsApp">
-<button onclick="login()">Entrar</button>
-</div>
-
-<!-- ÁREA DO ALUNO -->
-<div class="box hidden" id="areaAluno">
-<h2>Bem-vindo ao NextMind</h2>
-<p>Acesso liberado aos cursos</p>
-
-<a href="https://drive.google.com/drive/folders/12dVt6qKUWJti_4Q4MWQIs8GTE-u_fIn9?usp=sharing"
-target="_blank"
-class="btn">
-Acessar todos os cursos
-</a>
-</div>
-
 <script>
 async function login(){
 
-var whats = document.getElementById("whats").value;
+let whatsDigitado = document.getElementById("whats").value;
 
-if(whats.trim()===""){
+// limpa tudo que não for número
+whatsDigitado = whatsDigitado.replace(/\D/g,'');
+
+// remove 55 se a pessoa digitar com código do Brasil
+if(whatsDigitado.startsWith("55") && whatsDigitado.length > 11){
+whatsDigitado = whatsDigitado.substring(2);
+}
+
+if(whatsDigitado === ""){
 alert("Digite seu WhatsApp");
 return;
 }
@@ -110,7 +19,7 @@ return;
 try{
 
 const resposta = await fetch(
-"https://script.google.com/macros/s/AKfycby4nEQjdmfFuv3UnSQZ3zkiY1MhB4U7hkFMGvW45LwvmIewz7cdVs9lpKCIHqeYLoV3/exec?whats="+whats
+"https://script.google.com/macros/s/AKfycby4nEQjdmfFuv3UnSQZ3zkiY1MhB4U7hkFMGvW45LwvmIewz7cdVs9lpKCIHqeYLoV3/exec?whats="+whatsDigitado
 );
 
 const status = await resposta.text();
@@ -132,6 +41,3 @@ alert("Erro ao verificar acesso.");
 
 }
 </script>
-
-</body>
-</html>
