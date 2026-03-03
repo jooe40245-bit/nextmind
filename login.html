@@ -2,153 +2,111 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NextMind - Área do Aluno</title>
 
 <style>
 body{
 margin:0;
-height:100vh;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#021024,#03254c);
+color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#001a33,#003366,#001a33);
-background-size:400% 400%;
-animation:fundo 15s ease infinite;
-font-family:Arial, Helvetica, sans-serif;
-color:white;
-}
-
-@keyframes fundo{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+height:100vh;
 }
 
 .box{
-background:#000000dd;
+background:rgba(0,0,0,0.7);
 padding:40px;
 border-radius:20px;
-width:360px;
+width:400px;
 text-align:center;
-box-shadow:0 0 40px #00ffff33;
-}
-
-h2{
-margin-bottom:20px;
+box-shadow:0 0 30px rgba(0,255,255,0.4);
 }
 
 input{
 width:100%;
-padding:15px;
+padding:12px;
+margin-top:15px;
 border:none;
-border-radius:10px;
-margin-bottom:20px;
-font-size:16px;
+border-radius:8px;
 }
 
 button{
 width:100%;
-padding:15px;
+padding:14px;
+margin-top:20px;
 border:none;
-border-radius:10px;
-background:#008080;
-color:white;
+border-radius:8px;
+background:cyan;
 font-weight:bold;
 cursor:pointer;
 transition:0.3s;
 }
 
 button:hover{
-background:#00aaaa;
+transform:scale(1.05);
+box-shadow:0 0 20px cyan;
 }
 
-.mensagem{
-margin-top:15px;
-font-weight:bold;
-}
-
-.erro{
-color:#ff4d4d;
-}
-
-.sucesso{
-color:#00ff99;
+.hidden{
+display:none;
 }
 </style>
 </head>
+
 <body>
 
-<div class="box">
+<div class="box" id="loginBox">
 <h2>Área do Aluno</h2>
-
 <input type="text" id="whats" placeholder="Digite seu WhatsApp">
 <button onclick="login()">Entrar</button>
+</div>
 
-<div id="mensagem" class="mensagem"></div>
+<div class="box hidden" id="areaAluno">
+<h2>Bem-vindo ao NextMind</h2>
+<p>Acesso liberado</p>
+
+<a href="https://drive.google.com/drive/folders/12dVt6qKUWJti_4Q4MWQIs8GTE-u_fIn9?usp=sharing" target="_blank">
+<button>Acessar todos os cursos</button>
+</a>
 </div>
 
 <script>
-
 async function login(){
 
-const numero = document.getElementById("whats").value.replace(/\D/g,'');
-const msg = document.getElementById("mensagem");
+var whats = document.getElementById("whats").value;
 
-if(numero === ""){
-msg.innerHTML = "Digite seu WhatsApp.";
-msg.className = "mensagem erro";
+if(whats.trim() === ""){
+alert("Digite seu WhatsApp");
 return;
 }
 
 try{
 
 const resposta = await fetch(
-"https://script.google.com/macros/s/AKfycby4nEQjdmfFuv3UnSQZ3zkiY1MhB4U7hkFMGvW45LwvmIewz7cdVs9lpKCIHqeYLoV3/exec?whats=" + numero
+"https://script.google.com/macros/s/AKfycby4nEQjdmfFuv3UnSQZ3zkiY1MhB4U7hkFMGvW45LwvmIewz7cdVs9lpKCIHqeYLoV3/exec?whats=" + whats
 );
 
-const dados = await resposta.json();
+const status = await resposta.text();
 
-/*
-O Apps Script deve retornar:
-{
-status: "ATIVO" ou "VENCIDO" ou "NAO_ENCONTRADO",
-vencimento: "09/04/2026"
+if(status.trim() === "ATIVO"){
+document.getElementById("loginBox").classList.add("hidden");
+document.getElementById("areaAluno").classList.remove("hidden");
 }
-*/
-
-if(dados.status === "NAO_ENCONTRADO"){
-msg.innerHTML = "❌ Você ainda não possui assinatura.";
-msg.className = "mensagem erro";
-return;
+else if(status.trim() === "VENCIDO"){
+alert("Seu acesso está vencido.");
 }
-
-if(dados.status === "VENCIDO"){
-msg.innerHTML = "❌ Sua assinatura venceu.";
-msg.className = "mensagem erro";
-return;
-}
-
-if(dados.status === "ATIVO"){
-
-msg.innerHTML = "✅ Acesso liberado!";
-msg.className = "mensagem sucesso";
-
-setTimeout(()=>{
-window.location.href = "index.html";
-},1000);
-
+else{
+alert("WhatsApp não encontrado.");
 }
 
 }catch(e){
-
-msg.innerHTML = "Erro ao verificar acesso.";
-msg.className = "mensagem erro";
-
+alert("Erro ao verificar acesso.");
 }
 
 }
-
 </script>
 
 </body>
