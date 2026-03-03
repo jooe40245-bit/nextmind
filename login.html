@@ -1,28 +1,22 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NextMind - Área do Aluno</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
-}
-
 body{
+margin:0;
 height:100vh;
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 background:linear-gradient(135deg,#001a33,#003366,#001a33);
 background-size:400% 400%;
 animation:fundo 15s ease infinite;
+font-family:Arial, Helvetica, sans-serif;
 color:white;
-overflow:hidden;
 }
 
 @keyframes fundo{
@@ -31,17 +25,17 @@ overflow:hidden;
 100%{background-position:0% 50%;}
 }
 
-.container{
+.box{
 background:#000000dd;
 padding:40px;
 border-radius:20px;
-width:350px;
+width:360px;
 text-align:center;
 box-shadow:0 0 40px #00ffff33;
 }
 
-h1{
-margin-bottom:25px;
+h2{
+margin-bottom:20px;
 }
 
 input{
@@ -74,74 +68,84 @@ margin-top:15px;
 font-weight:bold;
 }
 
-.vencido{
+.erro{
 color:#ff4d4d;
 }
 
-.ativo{
+.sucesso{
 color:#00ff99;
 }
 </style>
 </head>
 <body>
 
-<div class="container">
-<h1>Área do Aluno</h1>
+<div class="box">
+<h2>Área do Aluno</h2>
 
-<input type="text" id="whatsapp" placeholder="Digite seu WhatsApp">
-
-<button onclick="verificar()">Entrar</button>
+<input type="text" id="whats" placeholder="Digite seu WhatsApp">
+<button onclick="login()">Entrar</button>
 
 <div id="mensagem" class="mensagem"></div>
-
 </div>
 
 <script>
 
-// ===== LISTA MANUAL DE ALUNOS =====
-// Você vai editar aqui manualmente
+async function login(){
 
-const alunos = [
-{
-whats: "13991442800",
-vencimento: "2026-03-30"
-},
-{
-whats: "11999999999",
-vencimento: "2025-01-10"
+const numero = document.getElementById("whats").value.replace(/\D/g,'');
+const msg = document.getElementById("mensagem");
+
+if(numero === ""){
+msg.innerHTML = "Digite seu WhatsApp.";
+msg.className = "mensagem erro";
+return;
 }
-];
 
-function verificar(){
+try{
 
-let numero = document.getElementById("whatsapp").value.replace(/\D/g,'');
-let hoje = new Date();
-let msg = document.getElementById("mensagem");
+const resposta = await fetch(
+"https://script.google.com/macros/s/AKfycby4nEQjdmfFuv3UnSQZ3zkiY1MhB4U7hkFMGvW45LwvmIewz7cdVs9lpKCIHqeYLoV3/exec?whats=" + numero
+);
 
-let aluno = alunos.find(a => a.whats === numero);
+const dados = await resposta.json();
 
-if(!aluno){
+/*
+O Apps Script deve retornar:
+{
+status: "ATIVO" ou "VENCIDO" ou "NAO_ENCONTRADO",
+vencimento: "09/04/2026"
+}
+*/
+
+if(dados.status === "NAO_ENCONTRADO"){
 msg.innerHTML = "❌ Você ainda não possui assinatura.";
-msg.className = "mensagem vencido";
+msg.className = "mensagem erro";
 return;
 }
 
-let dataVenc = new Date(aluno.vencimento);
-
-if(dataVenc < hoje){
+if(dados.status === "VENCIDO"){
 msg.innerHTML = "❌ Sua assinatura venceu.";
-msg.className = "mensagem vencido";
+msg.className = "mensagem erro";
 return;
 }
 
-// SE ESTIVER ATIVO
-msg.innerHTML = "✅ Acesso liberado!";
-msg.className = "mensagem ativo";
+if(dados.status === "ATIVO"){
 
-// redireciona após 1 segundo
+msg.innerHTML = "✅ Acesso liberado!";
+msg.className = "mensagem sucesso";
+
 setTimeout(()=>{
 window.location.href = "index.html";
 },1000);
+
+}
+
+}catch(e){
+
+msg.innerHTML = "Erro ao verificar acesso.";
+msg.className = "mensagem erro";
+
+}
 
 }
 
