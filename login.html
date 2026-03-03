@@ -6,7 +6,6 @@
 <title>NextMind - Área do Aluno</title>
 
 <style>
-
 body{
 margin:0;
 font-family:Arial, sans-serif;
@@ -35,7 +34,6 @@ border-radius:20px;
 width:380px;
 text-align:center;
 box-shadow:0 0 60px rgba(0,255,255,0.2);
-opacity:1;
 transition:0.5s;
 }
 
@@ -71,31 +69,6 @@ button:hover{
 background:#00bcd4;
 }
 
-.hidden{
-display:none;
-}
-
-.loading{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:#000;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:22px;
-letter-spacing:3px;
-z-index:999;
-animation:fadeIn 0.5s;
-}
-
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
-}
-
 .btn{
 display:block;
 margin-top:20px;
@@ -107,17 +80,37 @@ border-radius:10px;
 font-weight:bold;
 }
 
+.loading{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+display:none;
+justify-content:center;
+align-items:center;
+font-size:22px;
+letter-spacing:3px;
+z-index:999;
+}
+
+.hidden{
+display:none;
+}
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
 <div class="box" id="loginBox">
 <h2>LOGIN DO ALUNO</h2>
 <input type="text" id="whats" placeholder="Digite seu WhatsApp">
 <button onclick="login()">Entrar</button>
 </div>
 
+<!-- ÁREA DO ALUNO -->
 <div class="box hidden" id="areaAluno">
 <h2>BEM-VINDO AO NEXTMIND</h2>
 <p>Acesso liberado aos cursos</p>
@@ -129,7 +122,8 @@ Acessar Cursos
 </a>
 </div>
 
-<div class="loading hidden" id="loading">
+<!-- LOADING -->
+<div class="loading" id="loading">
 VERIFICANDO ACESSO...
 </div>
 
@@ -152,7 +146,8 @@ alert("Digite seu WhatsApp");
 return;
 }
 
-document.getElementById("loading").classList.remove("hidden");
+// mostra loading
+document.getElementById("loading").style.display = "flex";
 
 try{
 
@@ -162,9 +157,8 @@ const resposta = await fetch(
 
 const status = await resposta.text();
 
-setTimeout(function(){
-
-document.getElementById("loading").classList.add("hidden");
+// esconde loading
+document.getElementById("loading").style.display = "none";
 
 if(status.trim()==="ATIVO"){
 document.getElementById("loginBox").classList.add("hidden");
@@ -177,10 +171,8 @@ else{
 alert("WhatsApp não encontrado.");
 }
 
-},800);
-
 }catch(e){
-document.getElementById("loading").classList.add("hidden");
+document.getElementById("loading").style.display = "none";
 alert("Erro ao verificar acesso.");
 }
 
